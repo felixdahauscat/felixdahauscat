@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>felixdahauscat — Boudoir Photography · Australia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f5f0e8;
+      --warm-white: #fdfaf5;
+      --blush: #c9a99a;
+      --dusty-rose: #b08070;
+      --deep-mocha: #2a1f1a;
+      --mid-brown: #5c3d30;
+      --gold: #c4a96d;
+      --gold-light: #e8d5a3;
+      --text: #2a1f1a;
+      --text-light: #7a6258;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--warm-white);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Custom cursor */
+    .cursor {
+      width: 12px; height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s ease, background 0.2s, width 0.2s, height 0.2s;
+      mix-blend-mode: multiply;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1px solid var(--blush);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.35s cubic-bezier(.175,.885,.32,1.275);
+    }
+    body:hover .cursor { opacity: 1; }
+    a:hover ~ .cursor, button:hover ~ .cursor { transform: translate(-50%,-50%) scale(2); }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 52px;
+      mix-blend-mode: multiply;
+    }
+    nav::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(245,240,232,0.9) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: lowercase;
+      color: var(--deep-mocha);
+      text-decoration: none;
+      position: relative;
+    }
+    .nav-links {
+      display: flex; gap: 36px; list-style: none;
+      position: relative;
+    }
+    .nav-links a {
+      font-size: 0.68rem; letter-spacing: 0.2em;
+      text-transform: uppercase; text-decoration: none;
+      color: var(--mid-brown); font-weight: 300;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-left {
+      background: var(--cream);
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 0 52px 80px;
+      position: relative; z-index: 2;
+    }
+    .hero-left::after {
+      content: '';
+      position: absolute; right: -1px; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--blush) 40%, transparent);
+    }
+    .hero-eyebrow {
+      font-size: 0.65rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold);
+      font-weight: 300; margin-bottom: 22px;
+      opacity: 0; animation: fadeUp 1s 0.3s forwards;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.4rem, 6vw, 6.5rem);
+      font-weight: 300; line-height: 1.0;
+      color: var(--deep-mocha);
+      opacity: 0; animation: fadeUp 1s 0.5s forwards;
+    }
+    .hero-title em {
+      font-style: italic; color: var(--dusty-rose);
+      display: block;
+    }
+    .hero-sub {
+      margin-top: 28px;
+      font-size: 0.8rem; font-weight: 200; letter-spacing: 0.12em;
+      color: var(--text-light); line-height: 1.9;
+      max-width: 320px;
+      opacity: 0; animation: fadeUp 1s 0.7s forwards;
+    }
+    .hero-cta {
+      margin-top: 48px; display: flex; gap: 20px; align-items: center;
+      opacity: 0; animation: fadeUp 1s 0.9s forwards;
+    }
+    .btn-primary {
+      background: var(--deep-mocha); color: var(--cream);
+      padding: 16px 36px; font-family: 'Jost', sans-serif;
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      text-decoration: none; font-weight: 300;
+      transition: all 0.35s; border: none; cursor: none;
+      display: inline-block;
+    }
+    .btn-primary:hover {
+      background: var(--dusty-rose); letter-spacing: 0.28em;
+    }
+    .btn-ghost {
+      color: var(--mid-brown); font-size: 0.68rem;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      text-decoration: none; font-weight: 300;
+      border-bottom: 1px solid var(--blush);
+      padding-bottom: 3px; transition: all 0.3s;
+    }
+    .btn-ghost:hover { color: var(--gold); border-color: var(--gold); }
+
+    .hero-right {
+      position: relative; overflow: hidden;
+    }
+    .hero-image-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(145deg, #d4bfb0 0%, #c4a99a 30%, #a87f70 60%, #7a5548 100%);
+      position: relative; overflow: hidden;
+    }
+    .hero-image-placeholder::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='600'%3E%3Cellipse cx='200' cy='280' rx='140' ry='200' fill='rgba(255,255,255,0.06)'/%3E%3Cellipse cx='180' cy='260' rx='80' ry='130' fill='rgba(255,255,255,0.04)'/%3E%3C/svg%3E") center/cover;
+    }
+    .hero-grain {
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+      opacity: 0.4; pointer-events: none;
+    }
+    .hero-overlay-text {
+      position: absolute; bottom: 48px; left: 40px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 10vw, 9rem);
+      font-weight: 300; font-style: italic;
+      color: rgba(255,255,255,0.12);
+      line-height: 1; pointer-events: none;
+      user-select: none;
+    }
+    .hero-badge {
+      position: absolute; top: 48px; right: 36px;
+      width: 90px; height: 90px;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      animation: rotate 20s linear infinite;
+    }
+    .hero-badge span {
+      font-size: 0.52rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: rgba(255,255,255,0.7);
+      font-weight: 300; line-height: 1.8;
+    }
+
+    /* MARQUEE */
+    .marquee-strip {
+      background: var(--deep-mocha);
+      padding: 14px 0; overflow: hidden;
+    }
+    .marquee-inner {
+      display: flex; gap: 0; white-space: nowrap;
+      animation: marquee 30s linear infinite;
+    }
+    .marquee-item {
+      font-size: 0.62rem; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--gold-light);
+      font-weight: 200; padding: 0 40px;
+    }
+    .marquee-dot {
+      color: var(--dusty-rose); margin-right: -20px;
+    }
+
+    /* PHILOSOPHY */
+    .section-philosophy {
+      display: grid; grid-template-columns: 1fr 1.6fr;
+      min-height: 80vh; position: relative;
+    }
+    .phil-left {
+      background: var(--cream);
+      padding: 100px 60px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .section-label {
+      font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--blush); font-weight: 300; margin-bottom: 40px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .section-label::before {
+      content: ''; display: inline-block;
+      width: 30px; height: 1px; background: var(--blush);
+    }
+    .phil-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 300; line-height: 1.25;
+      color: var(--deep-mocha); margin-bottom: 30px;
+    }
+    .phil-heading em { font-style: italic; color: var(--dusty-rose); }
+    .phil-body {
+      font-size: 0.8rem; font-weight: 200; line-height: 2;
+      color: var(--text-light); margin-bottom: 20px;
+    }
+    .phil-right {
+      position: relative; overflow: hidden;
+      display: grid; grid-template-rows: 1fr 1fr;
+    }
+    .phil-img-top {
+      background: linear-gradient(135deg, #c9b5a8 0%, #a08878 100%);
+      position: relative; overflow: hidden;
+    }
+    .phil-img-top::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(42,31,26,0.3));
+    }
+    .phil-img-bot {
+      background: linear-gradient(135deg, #e0cfc6 0%, #c4a99a 100%);
+      position: relative; overflow: hidden;
+    }
+    .phil-number {
+      position: absolute; bottom: 20px; right: 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem; font-weight: 300; font-style: italic;
+      color: rgba(255,255,255,0.15); line-height: 1;
+      pointer-events: none;
+    }
+
+    /* EXPERIENCE */
+    .section-experience {
+      padding: 120px 52px;
+      background: var(--warm-white);
+      text-align: center;
+    }
+    .exp-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 300; color: var(--deep-mocha);
+      margin-bottom: 16px;
+    }
+    .exp-title em { font-style: italic; color: var(--dusty-rose); }
+    .exp-sub {
+      font-size: 0.75rem; font-weight: 200; letter-spacing: 0.12em;
+      color: var(--text-light); margin-bottom: 80px;
+    }
+    .exp-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--blush);
+      border: 1px solid var(--blush);
+      max-width: 900px; margin: 0 auto 80px;
+    }
+    .exp-card {
+      background: var(--warm-white);
+      padding: 56px 36px;
+      transition: background 0.4s;
+    }
+    .exp-card:hover { background: var(--cream); }
+    .exp-icon {
+      font-size: 1.6rem; margin-bottom: 24px;
+      display: block;
+    }
+    .exp-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 400;
+      color: var(--deep-mocha); margin-bottom: 14px;
+    }
+    .exp-card-body {
+      font-size: 0.75rem; font-weight: 200;
+      color: var(--text-light); line-height: 1.9;
+    }
+
+    /* GALLERY GRID */
+    .section-gallery {
+      padding: 0 52px 100px;
+    }
+    .gallery-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 48px;
+    }
+    .gallery-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 3rem); font-weight: 300;
+      color: var(--deep-mocha);
+    }
+    .gallery-title em { font-style: italic; color: var(--dusty-rose); }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      grid-template-rows: 340px 240px;
+      gap: 12px;
+    }
+    .g-item {
+      overflow: hidden; position: relative;
+      cursor: none;
+    }
+    .g-item:first-child { grid-row: 1 / 3; }
+    .g-thumb {
+      width: 100%; height: 100%;
+      transition: transform 0.7s cubic-bezier(.23,1,.32,1);
+    }
+    .g-item:hover .g-thumb { transform: scale(1.06); }
+    .g1 { background: linear-gradient(160deg, #c9b5a8 0%, #9a7060 100%); }
+    .g2 { background: linear-gradient(160deg, #e0cfc6 0%, #c4a99a 100%); }
+    .g3 { background: linear-gradient(160deg, #d4bfb0 0%, #a08070 100%); }
+    .g4 { background: linear-gradient(160deg, #c8b0a4 0%, #8a6050 100%); }
+    .g5 { background: linear-gradient(160deg, #dfd0c8 0%, #b89888 100%); }
+    .g-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(42,31,26,0.5) 0%, transparent 50%);
+      opacity: 0; transition: opacity 0.4s;
+      display: flex; align-items: flex-end; padding: 24px;
+    }
+    .g-item:hover .g-overlay { opacity: 1; }
+    .g-overlay-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem; font-style: italic;
+      color: rgba(255,255,255,0.9); font-weight: 300;
+    }
+
+    /* PACKAGES */
+    .section-packages {
+      background: var(--deep-mocha);
+      padding: 120px 52px;
+      position: relative; overflow: hidden;
+    }
+    .section-packages::before {
+      content: 'Packages';
+      position: absolute; right: -20px; top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 9rem; font-weight: 300; font-style: italic;
+      color: rgba(255,255,255,0.03);
+      pointer-events: none; white-space: nowrap;
+    }
+    .pkg-label {
+      font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold); font-weight: 300; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .pkg-label::before {
+      content: ''; width: 30px; height: 1px; background: var(--gold);
+    }
+    .pkg-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.5rem); font-weight: 300;
+      color: var(--cream); margin-bottom: 60px; line-height: 1.2;
+    }
+    .pkg-title em { font-style: italic; color: var(--blush); }
+    .pkg-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    }
+    .pkg-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 52px 36px;
+      transition: all 0.4s; position: relative;
+      overflow: hidden;
+    }
+    .pkg-card:hover {
+      background: rgba(201,169,154,0.1);
+      border-color: var(--blush);
+    }
+    .pkg-card.featured {
+      background: rgba(201,169,154,0.12);
+      border-color: var(--gold);
+    }
+    .pkg-card.featured::before {
+      content: 'Most Popular';
+      position: absolute; top: 0; right: 0;
+      background: var(--gold); color: var(--deep-mocha);
+      font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 6px 16px; font-weight: 400;
+    }
+    .pkg-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 400; font-style: italic;
+      color: var(--cream); margin-bottom: 8px;
+    }
+    .pkg-price {
+      font-size: 0.65rem; letter-spacing: 0.18em;
+      color: var(--gold); text-transform: uppercase; font-weight: 300;
+      margin-bottom: 30px;
+    }
+    .pkg-divider {
+      height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 30px;
+    }
+    .pkg-features {
+      list-style: none;
+    }
+    .pkg-features li {
+      font-size: 0.75rem; font-weight: 200; letter-spacing: 0.06em;
+      color: rgba(245,240,232,0.65); padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .pkg-features li::before {
+      content: '—'; color: var(--blush); font-size: 0.6rem;
+      flex-shrink: 0;
+    }
+    .pkg-cta {
+      margin-top: 36px; display: block; text-align: center;
+      padding: 14px 24px;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--cream); font-size: 0.65rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      text-decoration: none; font-weight: 300;
+      transition: all 0.35s;
+    }
+    .pkg-cta:hover {
+      background: var(--dusty-rose); border-color: var(--dusty-rose);
+    }
+    .pkg-card.featured .pkg-cta {
+      background: var(--gold); border-color: var(--gold); color: var(--deep-mocha);
+    }
+    .pkg-card.featured .pkg-cta:hover {
+      background: var(--dusty-rose); border-color: var(--dusty-rose); color: var(--cream);
+    }
+
+    /* TESTIMONIALS */
+    .section-testimonials {
+      padding: 120px 52px;
+      background: var(--cream);
+    }
+    .testi-header {
+      text-align: center; margin-bottom: 70px;
+    }
+    .testi-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 3rem); font-weight: 300;
+      color: var(--deep-mocha);
+    }
+    .testi-title em { font-style: italic; color: var(--dusty-rose); }
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .testi-card {
+      background: var(--warm-white);
+      padding: 44px 36px;
+      position: relative;
+    }
+    .testi-card::before {
+      content: '\201C';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem; font-weight: 300;
+      color: var(--blush); opacity: 0.4;
+      position: absolute; top: 10px; left: 28px;
+      line-height: 1;
+    }
+    .testi-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem; font-weight: 300; font-style: italic;
+      color: var(--mid-brown); line-height: 1.75;
+      margin-bottom: 24px; position: relative; z-index: 1;
+    }
+    .testi-author {
+      font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--blush); font-weight: 300;
+    }
+    .testi-loc {
+      font-size: 0.6rem; letter-spacing: 0.15em;
+      color: var(--text-light); font-weight: 200; margin-top: 4px;
+    }
+
+    /* ABOUT */
+    .section-about {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+    }
+    .about-img {
+      background: linear-gradient(145deg, #b09888 0%, #7a5548 100%);
+      position: relative; overflow: hidden;
+    }
+    .about-img-inner {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-img-circle {
+      width: 260px; height: 340px;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .about-img-text {
+      position: absolute; bottom: 40px; left: 40px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 7rem; font-weight: 300; font-style: italic;
+      color: rgba(255,255,255,0.08); line-height: 1;
+    }
+    .about-content {
+      padding: 100px 70px;
+      background: var(--warm-white);
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .about-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3vw, 3rem); font-weight: 300;
+      color: var(--deep-mocha); margin-bottom: 28px; line-height: 1.2;
+    }
+    .about-heading em { font-style: italic; color: var(--dusty-rose); }
+    .about-body {
+      font-size: 0.8rem; font-weight: 200; line-height: 2;
+      color: var(--text-light); margin-bottom: 16px;
+    }
+    .about-sig {
+      margin-top: 36px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-style: italic; font-weight: 300;
+      color: var(--dusty-rose);
+    }
+
+    /* CONTACT */
+    .section-contact {
+      background: var(--deep-mocha);
+      padding: 120px 52px;
+      position: relative; overflow: hidden;
+    }
+    .section-contact::after {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,169,154,0.08) 0%, transparent 70%);
+      bottom: -200px; right: -100px;
+      pointer-events: none;
+    }
+    .contact-inner {
+      max-width: 700px; margin: 0 auto; text-align: center;
+      position: relative; z-index: 2;
+    }
+    .contact-eyebrow {
+      font-size: 0.62rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold); font-weight: 300; margin-bottom: 20px;
+    }
+    .contact-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4.5vw, 4.5rem); font-weight: 300;
+      color: var(--cream); margin-bottom: 20px; line-height: 1.15;
+    }
+    .contact-heading em { font-style: italic; color: var(--blush); }
+    .contact-sub {
+      font-size: 0.78rem; font-weight: 200; letter-spacing: 0.1em;
+      color: rgba(245,240,232,0.55); margin-bottom: 60px; line-height: 1.9;
+    }
+    .contact-form {
+      display: grid; gap: 16px; text-align: left;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-input {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 16px 20px; width: 100%;
+      color: var(--cream); font-family: 'Jost', sans-serif;
+      font-size: 0.78rem; font-weight: 200; letter-spacing: 0.08em;
+      outline: none; transition: border-color 0.3s;
+      appearance: none;
+    }
+    .form-input::placeholder { color: rgba(245,240,232,0.3); }
+    .form-input:focus { border-color: var(--blush); }
+    textarea.form-input { resize: none; min-height: 120px; }
+    select.form-input option { background: var(--deep-mocha); }
+    .form-submit {
+      background: var(--dusty-rose); color: var(--cream);
+      border: none; padding: 18px 52px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase;
+      font-weight: 300; cursor: none;
+      transition: all 0.4s; margin-top: 8px;
+      width: 100%;
+    }
+    .form-submit:hover { background: var(--gold); color: var(--deep-mocha); letter-spacing: 0.32em; }
+    .contact-info {
+      display: flex; justify-content: center; gap: 52px;
+      margin-top: 56px; padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .info-item { text-align: center; }
+    .info-label {
+      font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); font-weight: 300; margin-bottom: 8px;
+    }
+    .info-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem; color: var(--cream); font-weight: 300;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #1a100d;
+      padding: 36px 52px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem; letter-spacing: 0.2em;
+      color: rgba(245,240,232,0.4); font-weight: 300;
+      text-decoration: none;
+    }
+    .footer-copy {
+      font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(245,240,232,0.2); font-weight: 200;
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 0.58rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: rgba(245,240,232,0.25);
+      text-decoration: none; font-weight: 200;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--blush); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* SCROLL REVEAL */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { height: 50vw; min-height: 300px; }
+      .hero-left { padding: 120px 32px 60px; }
+      nav { padding: 24px 32px; }
+      .section-philosophy, .section-about { grid-template-columns: 1fr; }
+      .phil-right { min-height: 400px; }
+      .about-img { min-height: 300px; }
+      .about-content { padding: 60px 32px; }
+      .phil-left { padding: 80px 32px; }
+      .exp-grid, .pkg-grid, .testi-grid, .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-rows: auto; }
+      .g-item:first-child { grid-row: auto; }
+      .form-row { grid-template-columns: 1fr; }
+      .contact-info { flex-direction: column; gap: 28px; }
+      .section-experience, .section-gallery, .section-packages, .section-testimonials, .section-contact { padding: 80px 32px; }
+      footer { flex-direction: column; gap: 16px; text-align: center; }
+      .nav-links { display: none; }
+      .gallery-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">felixdahauscat</a>
+    <ul class="nav-links">
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#packages">Packages</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Book Now</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Boudoir Photography · Australia</div>
+      <h1 class="hero-title">
+        You are<br>
+        <em>exquisitely</em>
+        <em>enough.</em>
+      </h1>
+      <p class="hero-sub">
+        A luxury boudoir experience celebrating your body, your story, 
+        and your power — photographed with artistry, intimacy, and care.
+        Serving clients across Sydney, Melbourne, Brisbane &amp; beyond.
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn-primary">Book Your Session</a>
+        <a href="#gallery" class="btn-ghost">View Gallery</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-image-placeholder">
+        <div class="hero-grain"></div>
+        <div class="hero-overlay-text">felix</div>
+        <div class="hero-badge">
+          <span>Luxury<br>Boudoir<br>·AUS·</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-inner">
+      <span class="marquee-item">Boudoir Photography</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Sydney</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Melbourne</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Brisbane</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Perth</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Luxury Sessions</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">All Bodies Welcome</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Safe Space</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Boudoir Photography</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Sydney</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Melbourne</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Brisbane</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Perth</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Luxury Sessions</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">All Bodies Welcome</span><span class="marquee-item marquee-dot">◆</span>
+      <span class="marquee-item">Safe Space</span><span class="marquee-item marquee-dot">◆</span>
+    </div>
+  </div>
+
+  <!-- PHILOSOPHY -->
+  <section class="section-philosophy" id="philosophy">
+    <div class="phil-left reveal">
+      <div class="section-label">The Experience</div>
+      <h2 class="phil-heading">
+        More than a<br>photograph.<br>
+        A <em>remembering</em><br>of who you are.
+      </h2>
+      <p class="phil-body">
+        Every session begins with a conversation — not just about poses or outfits, but about 
+        you. Your story. The version of yourself you've always wanted to see reflected back.
+      </p>
+      <p class="phil-body">
+        My studio is a sanctuary: private, unhurried, and completely judgement-free. Whether 
+        this is a gift for yourself, your partner, or a milestone you want to commemorate — 
+        I'm here to make it extraordinary.
+      </p>
+    </div>
+    <div class="phil-right">
+      <div class="phil-img-top">
+        <div class="phil-number">01</div>
+      </div>
+      <div class="phil-img-bot">
+        <div class="phil-number">02</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE CARDS -->
+  <section class="section-experience" id="experience">
+    <div class="section-label" style="justify-content:center; margin-bottom: 16px;">How It Works</div>
+    <h2 class="exp-title">Your <em>journey</em> from inquiry to artwork</h2>
+    <p class="exp-sub">Three simple steps to your most beautiful photographs.</p>
+    <div class="exp-grid reveal">
+      <div class="exp-card">
+        <span class="exp-icon">✦</span>
+        <div class="exp-card-title">Consultation</div>
+        <p class="exp-card-body">We connect via video or phone to discuss your vision, comfort levels, wardrobe ideas, and any questions you have. Zero pressure, full warmth.</p>
+      </div>
+      <div class="exp-card">
+        <span class="exp-icon">◈</span>
+        <div class="exp-card-title">Your Session</div>
+        <p class="exp-card-body">Step into a beautifully lit private studio. I guide every pose so you always look and feel your absolute best — even if you've never done this before.</p>
+      </div>
+      <div class="exp-card">
+        <span class="exp-icon">◇</span>
+        <div class="exp-card-title">Your Gallery</div>
+        <p class="exp-card-body">Receive a curated online gallery of retouched images. Choose your favourites for prints, albums, or digital downloads to treasure forever.</p>
+      </div>
+    </div>
+    <a href="#contact" class="btn-primary">Start Your Journey</a>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section-gallery" id="gallery">
+    <div class="gallery-header reveal">
+      <h2 class="gallery-title">Selected <em>work</em></h2>
+      <a href="#contact" class="btn-ghost">Inquire about your session →</a>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="g-item">
+        <div class="g-thumb g1"></div>
+        <div class="g-overlay"><span class="g-overlay-text">Golden Hour</span></div>
+      </div>
+      <div class="g-item">
+        <div class="g-thumb g2"></div>
+        <div class="g-overlay"><span class="g-overlay-text">Soft Light</span></div>
+      </div>
+      <div class="g-item">
+        <div class="g-thumb g3"></div>
+        <div class="g-overlay"><span class="g-overlay-text">Intimate</span></div>
+      </div>
+      <div class="g-item">
+        <div class="g-thumb g4"></div>
+        <div class="g-overlay"><span class="g-overlay-text">Editorial</span></div>
+      </div>
+      <div class="g-item">
+        <div class="g-thumb g5"></div>
+        <div class="g-overlay"><span class="g-overlay-text">Timeless</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES -->
+  <section class="section-packages" id="packages">
+    <div class="pkg-label">Investment</div>
+    <h2 class="pkg-title">Choose your<br><em>experience</em></h2>
+    <div class="pkg-grid reveal">
+      <div class="pkg-card">
+        <div class="pkg-name">The Intimate</div>
+        <div class="pkg-price">Starting from $490 AUD</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li>90-minute studio session</li>
+          <li>Professional hair & makeup</li>
+          <li>10 fully retouched digital images</li>
+          <li>Private online gallery</li>
+          <li>Outfit changes (up to 2)</li>
+          <li>Downloadable files included</li>
+        </ul>
+        <a href="#contact" class="pkg-cta">Enquire Now</a>
+      </div>
+      <div class="pkg-card featured">
+        <div class="pkg-name">The Signature</div>
+        <div class="pkg-price">Starting from $890 AUD</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li>Full-day studio experience</li>
+          <li>Premium hair, makeup & styling</li>
+          <li>25 fully retouched digital images</li>
+          <li>Outfit changes (unlimited)</li>
+          <li>Luxury printed album included</li>
+          <li>Private online gallery</li>
+          <li>Partner portrait add-on option</li>
+        </ul>
+        <a href="#contact" class="pkg-cta">Enquire Now</a>
+      </div>
+      <div class="pkg-card">
+        <div class="pkg-name">The Collection</div>
+        <div class="pkg-price">Starting from $1,490 AUD</div>
+        <div class="pkg-divider"></div>
+        <ul class="pkg-features">
+          <li>Full-day VIP experience</li>
+          <li>Premium hair, makeup & styling</li>
+          <li>Full gallery of all edited images</li>
+          <li>Unlimited outfit changes</li>
+          <li>Luxury album + wall art prints</li>
+          <li>Priority scheduling & travel</li>
+          <li>Gifting packaging included</li>
+        </ul>
+        <a href="#contact" class="pkg-cta">Enquire Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section-testimonials">
+    <div class="testi-header reveal">
+      <div class="section-label" style="justify-content:center;">Kind Words</div>
+      <h2 class="testi-title">What clients <em>say</em></h2>
+    </div>
+    <div class="testi-grid reveal">
+      <div class="testi-card">
+        <p class="testi-text">I was so nervous walking in. By the end I didn't want to leave. Felix made me feel like the most beautiful version of myself I'd ever seen. I cried looking at my photos.</p>
+        <div class="testi-author">— Amara J.</div>
+        <div class="testi-loc">Sydney, NSW</div>
+      </div>
+      <div class="testi-card">
+        <p class="testi-text">I booked this as a birthday gift to myself and it was the best decision I've ever made. The whole experience was luxurious, empowering, and so much fun. 10/10 recommend.</p>
+        <div class="testi-author">— Sienna K.</div>
+        <div class="testi-loc">Melbourne, VIC</div>
+      </div>
+      <div class="testi-card">
+        <p class="testi-text">As someone who has always struggled with body image, I was terrified. Felix is so calming and professional. I look at these photos and finally see what others see in me.</p>
+        <div class="testi-author">— Priya M.</div>
+        <div class="testi-loc">Brisbane, QLD</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section-about" id="about">
+    <div class="about-img">
+      <div class="about-img-inner">
+        <div class="about-img-circle"></div>
+      </div>
+      <div class="about-img-text">felix</div>
+    </div>
+    <div class="about-content reveal">
+      <div class="section-label">About Felix</div>
+      <h2 class="about-heading">
+        A photographer<br>
+        who sees your<br>
+        <em>true radiance.</em>
+      </h2>
+      <p class="about-body">
+        Hi — I'm Felix. I've spent years perfecting the art of boudoir photography across 
+        Australia, working with clients of every size, shape, age, and background. My 
+        studio is built on trust, discretion, and genuine celebration of the human form.
+      </p>
+      <p class="about-body">
+        I believe every single person deserves to see themselves as the stunning, worthy 
+        individual they are. That belief is the heart of everything I do — from the way I 
+        light a scene to the way I hold space for you throughout your experience.
+      </p>
+      <p class="about-body">
+        Based in Sydney with regular pop-up studio dates in Melbourne and Brisbane, 
+        I also offer destination sessions Australia-wide.
+      </p>
+      <div class="about-sig">felixdahauscat</div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section-contact" id="contact">
+    <div class="contact-inner">
+      <div class="contact-eyebrow">Book Your Session</div>
+      <h2 class="contact-heading">
+        Ready to feel<br>
+        <em>extraordinary?</em>
+      </h2>
+      <p class="contact-sub">
+        Fill in the form below and I'll be in touch within 24 hours to discuss 
+        your vision and availability. All inquiries are completely confidential.
+      </p>
+      <div class="contact-form">
+        <div class="form-row">
+          <input type="text" class="form-input" placeholder="Your Name" />
+          <input type="email" class="form-input" placeholder="Email Address" />
+        </div>
+        <div class="form-row">
+          <input type="tel" class="form-input" placeholder="Phone (optional)" />
+          <select class="form-input">
+            <option value="" disabled selected>Your City</option>
+            <option>Sydney, NSW</option>
+            <option>Melbourne, VIC</option>
+            <option>Brisbane, QLD</option>
+            <option>Perth, WA</option>
+            <option>Adelaide, SA</option>
+            <option>Other / Regional</option>
+          </select>
+        </div>
+        <select class="form-input">
+          <option value="" disabled selected>Session Type of Interest</option>
+          <option>The Intimate — $490+</option>
+          <option>The Signature — $890+</option>
+          <option>The Collection — $1,490+</option>
+          <option>Not sure yet — let's chat!</option>
+        </select>
+        <textarea class="form-input" placeholder="Tell me a little about what you're hoping for from your session…"></textarea>
+        <button class="form-submit" type="button">Send My Enquiry ◆</button>
+      </div>
+      <div class="contact-info">
+        <div class="info-item">
+          <div class="info-label">Email</div>
+          <div class="info-value">hello@felixdahauscat.com.au</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Based In</div>
+          <div class="info-value">Sydney, Australia</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Instagram</div>
+          <div class="info-value">@felixdahauscat</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#" class="footer-logo">felixdahauscat</a>
+    <span class="footer-copy">© 2026 felixdahauscat · All rights reserved · ABN 00 000 000 000</span>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Instagram</a>
+    </div>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function animateCursor() {
+      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
+        ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
+        ring.style.borderColor = 'var(--gold)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+        ring.style.transform = 'translate(-50%,-50%) scale(1)';
+        ring.style.borderColor = 'var(--blush)';
+      });
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Nav scroll effect
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.background = window.scrollY > 60
+        ? 'rgba(245,240,232,0.96)'
+        : 'transparent';
+      nav.style.backdropFilter = window.scrollY > 60 ? 'blur(12px)' : 'none';
+      nav.style.boxShadow = window.scrollY > 60 ? '0 1px 0 rgba(92,61,48,0.1)' : 'none';
+      nav.style.transition = 'all 0.4s ease';
+    });
+
+    // Form submit
+    document.querySelector('.form-submit').addEventListener('click', function() {
+      this.textContent = 'Enquiry Sent — I\'ll be in touch soon ✦';
+      this.style.background = 'var(--gold)';
+      this.style.color = 'var(--deep-mocha)';
+      this.disabled = true;
+    });
+  </script>
+</body>
+</html>
