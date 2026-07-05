@@ -829,6 +829,82 @@
       .nav-links { display: none; }
       .gallery-header { flex-direction: column; align-items: flex-start; gap: 12px; }
     }
+
+    /* ===== Lead-capture popup ===== */
+    .popup-overlay {
+      position: fixed; inset: 0; z-index: 2000;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      background: rgba(20, 14, 11, 0.72);
+      backdrop-filter: blur(6px);
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    .popup-overlay.open { opacity: 1; visibility: visible; }
+    .popup-card {
+      position: relative;
+      width: 100%; max-width: 460px;
+      background: var(--deep-mocha);
+      color: var(--cream);
+      border: 1px solid rgba(196, 169, 109, 0.35);
+      border-radius: 2px;
+      padding: 56px 44px 48px;
+      text-align: center;
+      box-shadow: 0 40px 90px rgba(0, 0, 0, 0.5);
+      transform: translateY(24px) scale(0.98);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: calc(100vh - 48px); overflow-y: auto;
+    }
+    .popup-overlay.open .popup-card { transform: translateY(0) scale(1); }
+    .popup-close {
+      position: absolute; top: 16px; right: 18px;
+      width: 34px; height: 34px;
+      background: none; border: none; cursor: none;
+      color: var(--blush); font-size: 1.4rem; line-height: 1;
+      opacity: 0.7; transition: opacity 0.3s ease, color 0.3s ease;
+    }
+    .popup-close:hover { opacity: 1; color: var(--gold); }
+    .popup-eyebrow {
+      font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 18px;
+    }
+    .popup-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.1rem; font-weight: 300; line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .popup-title em { font-style: italic; color: var(--blush); }
+    .popup-text {
+      font-size: 0.95rem; font-weight: 300; color: var(--blush);
+      line-height: 1.6; margin-bottom: 28px;
+    }
+    .popup-card .form-input { margin-bottom: 14px; }
+    .popup-card .form-submit { width: 100%; margin-top: 4px; }
+    .popup-consent {
+      display: flex; gap: 11px; align-items: flex-start;
+      text-align: left; margin: 4px 0 20px; cursor: none;
+    }
+    .popup-consent input {
+      flex: 0 0 auto; width: 16px; height: 16px; margin-top: 3px;
+      accent-color: var(--gold); cursor: none;
+    }
+    .popup-consent span {
+      font-size: 0.78rem; font-weight: 300; color: var(--blush);
+      line-height: 1.55;
+    }
+    .popup-fine {
+      font-size: 0.72rem; color: var(--text-light);
+      margin-top: 18px; letter-spacing: 0.02em;
+    }
+    .popup-success { display: none; }
+    .popup-card.done .popup-form,
+    .popup-card.done .popup-text,
+    .popup-card.done .popup-eyebrow { display: none; }
+    .popup-card.done .popup-success { display: block; }
+    @media (max-width: 480px) {
+      .popup-card { padding: 48px 26px 40px; }
+      .popup-title { font-size: 1.8rem; }
+    }
   </style>
 </head>
 <body>
@@ -1168,6 +1244,41 @@
     </div>
   </footer>
 
+  <!-- LEAD-CAPTURE POPUP -->
+  <div class="popup-overlay" id="capturePopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle" aria-hidden="true">
+    <div class="popup-card" id="popupCard">
+      <button class="popup-close" id="popupClose" type="button" aria-label="Close">&times;</button>
+      <div class="popup-eyebrow">Da HAUS Cat &middot; Private Invitation</div>
+      <h3 class="popup-title" id="popupTitle">Join <em>The Velvet List</em></h3>
+      <p class="popup-text">
+        First access to travel dates, private offers reserved for the list, and letters worth undressing your inbox for.
+      </p>
+      <form class="popup-form" name="popup-capture" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="popup-capture" />
+        <input type="hidden" name="subject" value="New Velvet List signup — felixdahauscat.com" />
+        <p hidden>
+          <label>Don't fill this out: <input name="bot-field" /></label>
+        </p>
+        <input type="text" name="name" class="form-input" placeholder="Your first name" autocomplete="given-name" required />
+        <input type="email" name="email" class="form-input" placeholder="you@example.com" autocomplete="email" required />
+        <input type="text" name="location" class="form-input" placeholder="City, Country" autocomplete="address-level2" required />
+        <label class="popup-consent">
+          <input type="checkbox" name="newsletter" value="Yes" required />
+          <span>Yes — add me to The Velvet List newsletter for special offers, travel dates, and studio news. Unsubscribe anytime.</span>
+        </label>
+        <button class="form-submit" type="submit">Reserve My Place</button>
+        <p class="popup-fine">No noise. No spam. Only the good letters.</p>
+      </form>
+      <div class="popup-success">
+        <div class="popup-eyebrow" style="display:block">Confirmed</div>
+        <h3 class="popup-title">You're <em>on the list</em></h3>
+        <p class="popup-text" style="display:block">
+          Watch your inbox. The next letter comes to you first.
+        </p>
+      </div>
+    </div>
+  </div>
+
   <script>
     // Custom cursor
     const cursor = document.getElementById('cursor');
@@ -1224,6 +1335,49 @@
       this.style.color = 'var(--deep-mocha)';
       this.disabled = true;
     });
+
+    // Lead-capture popup — appears 5s after every page load
+    (function () {
+      const overlay = document.getElementById('capturePopup');
+      const card = document.getElementById('popupCard');
+      const closeBtn = document.getElementById('popupClose');
+      const form = overlay.querySelector('.popup-form');
+
+      function openPopup() {
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+      }
+      function closePopup() {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+      }
+
+      setTimeout(openPopup, 5000);
+
+      closeBtn.addEventListener('click', function () { closePopup(); });
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) { closePopup(); }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) { closePopup(); }
+      });
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const btn = form.querySelector('.form-submit');
+        btn.disabled = true;
+        btn.textContent = 'Reserving…';
+        try {
+          await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(new FormData(form)).toString(),
+          });
+        } catch (err) { /* submission still queued by browser on most failures */ }
+        card.classList.add('done');
+        setTimeout(closePopup, 3200);
+      });
+    })();
   </script>
 </body>
 </html>
