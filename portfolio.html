@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — felixdahauscat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f5f0e8;
+      --warm-white: #fdfaf5;
+      --blush: #c9a99a;
+      --dusty-rose: #b08070;
+      --deep-mocha: #2a1f1a;
+      --mid-brown: #5c3d30;
+      --gold: #c4a96d;
+      --gold-light: #e8d5a3;
+      --text: #2a1f1a;
+      --text-light: #7a6258;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--warm-white);
+      color: var(--text);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* Cursor */
+    .cursor {
+      width: 12px; height: 12px;
+      background: var(--gold); border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s ease, width 0.2s, height 0.2s;
+      mix-blend-mode: multiply;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1px solid var(--blush); border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all 0.35s cubic-bezier(.175,.885,.32,1.275);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 28px 52px;
+      background: rgba(253,250,245,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,169,154,0.15);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem; font-weight: 400;
+      letter-spacing: 0.25em; text-transform: lowercase;
+      color: var(--deep-mocha); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-links a {
+      font-size: 0.68rem; letter-spacing: 0.2em;
+      text-transform: uppercase; text-decoration: none;
+      color: var(--mid-brown); font-weight: 300; transition: color 0.3s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-links .breadcrumb-sep {
+      color: var(--blush); font-size: 0.6rem; opacity: 0.6;
+    }
+
+    /* HERO BANNER */
+    .page-hero {
+      margin-top: 85px;
+      height: 42vh; min-height: 300px;
+      display: flex; align-items: flex-end;
+      position: relative; overflow: hidden;
+      background: var(--deep-mocha);
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #2a1f1a 0%, #3d2820 40%, #5c3030 100%);
+    }
+    .page-hero-pattern {
+      position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(196,169,109,0.03) 40px,
+        rgba(196,169,109,0.03) 41px
+      );
+    }
+    .page-hero-orb {
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(176,128,112,0.12) 0%, transparent 70%);
+      right: -100px; top: -100px;
+    }
+    .page-hero-content {
+      position: relative; z-index: 2;
+      padding: 0 52px 52px;
+    }
+    .breadcrumb {
+      font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(245,240,232,0.4); margin-bottom: 14px; font-weight: 300;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .breadcrumb a { color: inherit; text-decoration: none; transition: color 0.3s; }
+    .breadcrumb a:hover { color: var(--gold); }
+    .breadcrumb-sep { opacity: 0.4; }
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300; color: var(--cream); line-height: 1;
+    }
+    .page-title em { font-style: italic; color: var(--blush); }
+    .page-subtitle {
+      margin-top: 14px;
+      font-size: 0.75rem; font-weight: 200; letter-spacing: 0.15em;
+      color: rgba(245,240,232,0.45);
+    }
+
+    /* GALLERY NAV TABS */
+    .gallery-nav {
+      position: sticky; top: 85px; z-index: 90;
+      background: rgba(253,250,245,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,169,154,0.2);
+      display: flex; align-items: center;
+      padding: 0 52px;
+      gap: 0;
+    }
+    .gallery-tab {
+      font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+      font-weight: 300; color: var(--text-light);
+      padding: 20px 28px; cursor: none;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s; text-decoration: none;
+      display: inline-block;
+    }
+    .gallery-tab:hover { color: var(--mid-brown); }
+    .gallery-tab.active {
+      color: var(--deep-mocha);
+      border-bottom-color: var(--gold);
+    }
+    .gallery-count {
+      font-size: 0.55rem; margin-left: 6px;
+      background: var(--cream); color: var(--text-light);
+      padding: 2px 6px; border-radius: 20px;
+      font-weight: 300;
+    }
+
+    /* GALLERY SECTIONS */
+    .gallery-section {
+      padding: 80px 52px;
+      border-bottom: 1px solid rgba(201,169,154,0.12);
+    }
+    .gallery-section:last-of-type { border-bottom: none; }
+
+    .gallery-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 48px;
+    }
+    .gallery-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 300; color: var(--deep-mocha); line-height: 1;
+    }
+    .gallery-section-title em { font-style: italic; color: var(--dusty-rose); }
+    .gallery-desc {
+      font-size: 0.75rem; font-weight: 200; letter-spacing: 0.08em;
+      color: var(--text-light); max-width: 320px; line-height: 1.9;
+      text-align: right;
+    }
+
+    /* MASONRY GRID */
+    .masonry {
+      columns: 3; column-gap: 12px;
+    }
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+      cursor: none;
+    }
+    .masonry-item:nth-child(3n+1) { margin-top: 0; }
+    .masonry-thumb {
+      width: 100%; display: block;
+      transition: transform 0.7s cubic-bezier(.23,1,.32,1);
+    }
+    .masonry-item:hover .masonry-thumb { transform: scale(1.05); }
+
+    /* Placeholder image squares of different heights */
+    .img-ph {
+      width: 100%;
+      display: block;
+      transition: transform 0.7s cubic-bezier(.23,1,.32,1);
+    }
+    .masonry-item:hover .img-ph { transform: scale(1.05); }
+
+    .masonry-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(42,31,26,0.65) 0%, transparent 50%);
+      opacity: 0; transition: opacity 0.4s;
+      display: flex; align-items: flex-end;
+      padding: 20px;
+    }
+    .masonry-item:hover .masonry-overlay { opacity: 1; }
+    .masonry-caption {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem; font-style: italic; font-weight: 300;
+      color: rgba(245,240,232,0.9);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(42,31,26,0.96);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.4s;
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox-inner {
+      position: relative; max-width: 80vw; max-height: 85vh;
+    }
+    .lightbox-img {
+      max-width: 80vw; max-height: 85vh;
+      object-fit: contain; display: block;
+    }
+    .lightbox-img-ph {
+      width: 500px; max-width: 80vw; height: 600px; max-height: 85vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-close {
+      position: fixed; top: 32px; right: 40px;
+      width: 44px; height: 44px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%; cursor: none;
+      display: flex; align-items: center; justify-content: center;
+      background: transparent; transition: all 0.3s;
+      color: rgba(245,240,232,0.6); font-size: 1.2rem;
+    }
+    .lightbox-close:hover {
+      border-color: var(--blush); color: var(--cream);
+      background: rgba(255,255,255,0.05);
+    }
+    .lightbox-caption-wrap {
+      position: fixed; bottom: 36px; left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+    .lightbox-caption {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; font-style: italic; font-weight: 300;
+      color: rgba(245,240,232,0.6);
+      letter-spacing: 0.1em;
+    }
+    .lightbox-nav {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%; cursor: none;
+      display: flex; align-items: center; justify-content: center;
+      background: transparent; transition: all 0.3s;
+      color: rgba(245,240,232,0.5); font-size: 1rem;
+    }
+    .lightbox-nav:hover { border-color: var(--blush); color: var(--cream); }
+    .lightbox-prev { left: 24px; }
+    .lightbox-next { right: 24px; }
+
+    /* Placeholder photo blocks */
+    .ph { display: block; width: 100%; }
+
+    /* Boudoir palette */
+    .b1 { background: linear-gradient(160deg, #d4bfb0 0%, #a08878 100%); }
+    .b2 { background: linear-gradient(140deg, #e0cfc6 0%, #b89888 100%); }
+    .b3 { background: linear-gradient(170deg, #c4b0a4 0%, #8a6858 100%); }
+    .b4 { background: linear-gradient(150deg, #d8c8be 0%, #9a7868 100%); }
+    .b5 { background: linear-gradient(165deg, #cebfb2 0%, #907060 100%); }
+    .b6 { background: linear-gradient(145deg, #e4d4ca 0%, #c0988a 100%); }
+    .b7 { background: linear-gradient(155deg, #bfada0 0%, #7a5c4e 100%); }
+    .b8 { background: linear-gradient(160deg, #daccbf 0%, #a88070 100%); }
+    .b9 { background: linear-gradient(140deg, #c8b4a8 0%, #886858 100%); }
+
+    /* Swimwear palette */
+    .s1 { background: linear-gradient(160deg, #b8ccd8 0%, #5c8098 100%); }
+    .s2 { background: linear-gradient(140deg, #c8d8dc 0%, #7898a8 100%); }
+    .s3 { background: linear-gradient(170deg, #d4c4a8 0%, #907858 100%); }
+    .s4 { background: linear-gradient(150deg, #b4c8c0 0%, #607870 100%); }
+    .s5 { background: linear-gradient(165deg, #d0c8b8 0%, #887868 100%); }
+    .s6 { background: linear-gradient(145deg, #a8c0c8 0%, #486878 100%); }
+    .s7 { background: linear-gradient(155deg, #c4b8a8 0%, #807060 100%); }
+    .s8 { background: linear-gradient(160deg, #b8d0c8 0%, #587868 100%); }
+
+    /* Nude palette */
+    .n1 { background: linear-gradient(160deg, #c8b8a8 0%, #7a6858 100%); }
+    .n2 { background: linear-gradient(140deg, #d8c8b8 0%, #9a8878 100%); }
+    .n3 { background: linear-gradient(170deg, #b8a898 0%, #685848 100%); }
+    .n4 { background: linear-gradient(150deg, #d0bca8 0%, #8a7060 100%); }
+    .n5 { background: linear-gradient(165deg, #c4b0a0 0%, #806850 100%); }
+    .n6 { background: linear-gradient(145deg, #dcc8b8 0%, #a08878 100%); }
+    .n7 { background: linear-gradient(155deg, #bfb0a0 0%, #707060 100%); }
+
+    /* ENQUIRY SECTION */
+    .enquiry-section {
+      background: var(--deep-mocha);
+      padding: 120px 52px;
+      position: relative; overflow: hidden;
+    }
+    .enquiry-section::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,169,109,0.06) 0%, transparent 70%);
+      top: -200px; right: -200px; pointer-events: none;
+    }
+    .enquiry-section::after {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(176,128,112,0.07) 0%, transparent 70%);
+      bottom: -150px; left: -100px; pointer-events: none;
+    }
+    .enquiry-inner {
+      max-width: 780px; margin: 0 auto;
+      position: relative; z-index: 2;
+    }
+    .enquiry-label {
+      font-size: 0.62rem; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold); font-weight: 300; margin-bottom: 18px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .enquiry-label::before {
+      content: ''; width: 28px; height: 1px; background: var(--gold);
+    }
+    .enquiry-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+      font-weight: 300; color: var(--cream);
+      line-height: 1.1; margin-bottom: 18px;
+    }
+    .enquiry-heading em { font-style: italic; color: var(--blush); }
+    .enquiry-sub {
+      font-size: 0.78rem; font-weight: 200; letter-spacing: 0.1em;
+      color: rgba(245,240,232,0.45); margin-bottom: 56px;
+      line-height: 2; max-width: 520px;
+    }
+    .form-grid { display: grid; gap: 14px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-input {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 16px 20px; width: 100%;
+      color: var(--cream); font-family: 'Jost', sans-serif;
+      font-size: 0.78rem; font-weight: 200; letter-spacing: 0.08em;
+      outline: none; transition: border-color 0.3s; appearance: none;
+      border-radius: 0;
+    }
+    .form-input::placeholder { color: rgba(245,240,232,0.25); }
+    .form-input:focus { border-color: var(--blush); }
+    textarea.form-input { resize: none; min-height: 130px; }
+    select.form-input option { background: var(--deep-mocha); }
+    .form-row-three { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    .form-submit {
+      background: var(--dusty-rose); color: var(--cream);
+      border: none; padding: 18px 52px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase;
+      font-weight: 300; cursor: none; transition: all 0.4s;
+      margin-top: 6px; width: 100%; border-radius: 0;
+    }
+    .form-submit:hover {
+      background: var(--gold); color: var(--deep-mocha);
+      letter-spacing: 0.35em;
+    }
+    .enquiry-info {
+      display: flex; justify-content: center; gap: 52px;
+      margin-top: 52px; padding-top: 44px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .info-item { text-align: center; }
+    .info-label {
+      font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); font-weight: 300; margin-bottom: 8px;
+    }
+    .info-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem; color: var(--cream); font-weight: 300;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #1a100d; padding: 32px 52px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif; font-size: 0.9rem;
+      letter-spacing: 0.2em; color: rgba(245,240,232,0.35);
+      font-weight: 300; text-decoration: none;
+    }
+    .footer-copy {
+      font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(245,240,232,0.18); font-weight: 200;
+    }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(245,240,232,0.22); text-decoration: none; font-weight: 200;
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--blush); }
+
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* MARQUEE */
+    .marquee-strip {
+      background: var(--deep-mocha); padding: 12px 0; overflow: hidden;
+    }
+    .marquee-inner {
+      display: flex; white-space: nowrap;
+      animation: marquee 28s linear infinite;
+    }
+    .marquee-item {
+      font-size: 0.6rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--gold-light); font-weight: 200; padding: 0 36px;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .page-hero-content { padding: 0 24px 40px; }
+      .gallery-nav { padding: 0 24px; overflow-x: auto; }
+      .gallery-section { padding: 60px 24px; }
+      .masonry { columns: 2; }
+      .gallery-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .gallery-desc { text-align: left; max-width: 100%; }
+      .enquiry-section { padding: 80px 24px; }
+      .form-row, .form-row-three { grid-template-columns: 1fr; }
+      .enquiry-info { flex-direction: column; gap: 24px; }
+      footer { flex-direction: column; gap: 14px; text-align: center; }
+    }
+    @media (max-width: 540px) {
+      .masonry { columns: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">felixdahauscat</a>
+    <ul class="nav-links">
+      <li><a href="index.html#philosophy">Philosophy</a></li>
+      <li><a href="portfolio.html" class="active">Portfolio</a></li>
+      <li><a href="index.html#packages">Packages</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="#enquire">Book Now</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-pattern"></div>
+    <div class="page-hero-orb"></div>
+    <div class="page-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Portfolio</span>
+      </div>
+      <h1 class="page-title">Selected <em>work</em></h1>
+      <p class="page-subtitle">Boudoir · Swimwear · Nude &nbsp;·&nbsp; Australia-wide</p>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-inner">
+      <span class="marquee-item">Boudoir</span><span class="marquee-item">◆</span>
+      <span class="marquee-item">Swimwear</span><span class="marquee-item">◆</span>
+      <span class="marquee-item">Nude</span><span class="marquee-item">◆</span>
+      <span class="marquee-item">Melbourne</span><span class="marquee-item">◆</span>
+      <span class="marquee-item">Sydney</span><span class="marquee-item">◆</span>
+      <span class="marquee-item">Brisbane</span><span class="marquee-item">◆</span>
+      <span class="marquee-item">Australia-wide</span><span class="marquee-item">◆</span>
+      <span class="marquee-item">Boudoir</span><span class="marquee-item">◆</span>
+      <span class="marquee-item">Swimwear</span><span class="marquee-item">◆</span>
+      <span class="marquee-item">Nude</span><span class="marquee-item">◆</span>
+      <span class="marquee-item">Melbourne</span><span class="marquee-item">◆</span>
+      <span class="marquee-item">Sydney</span><span class="marquee-item">◆</span>
+      <span class="marquee-item">Brisbane</span><span class="marquee-item">◆</span>
+      <span class="marquee-item">Australia-wide</span><span class="marquee-item">◆</span>
+    </div>
+  </div>
+
+  <!-- STICKY GALLERY TABS -->
+  <div class="gallery-nav" id="galleryNav">
+    <a href="#boudoir" class="gallery-tab active" data-tab="boudoir">Boudoir <span class="gallery-count">9</span></a>
+    <a href="#swimwear" class="gallery-tab" data-tab="swimwear">Swimwear <span class="gallery-count">8</span></a>
+    <a href="#nude" class="gallery-tab" data-tab="nude">Nude <span class="gallery-count">7</span></a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       GALLERY 1 — BOUDOIR
+  ═══════════════════════════════════════════ -->
+  <section class="gallery-section" id="boudoir">
+    <div class="gallery-header reveal">
+      <div>
+        <h2 class="gallery-section-title">Boudoir</h2>
+      </div>
+      <p class="gallery-desc">
+        Intimate, editorial, and entirely yours. Every session is a private conversation between you and the camera — guided by warmth, held by trust.
+      </p>
+    </div>
+    <div class="masonry reveal" id="boudoir-grid">
+
+      <div class="masonry-item" onclick="openLightbox('boudoir',0)">
+        <div class="ph b1" style="height:380px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">She arrived with a list of things she wanted to hide.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('boudoir',1)">
+        <div class="ph b2" style="height:260px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">Soft light. No armour.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('boudoir',2)">
+        <div class="ph b3" style="height:300px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">This is what 40 looks like when it stops apologising.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('boudoir',3)">
+        <div class="ph b4" style="height:290px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">For herself. For nobody else.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('boudoir',4)">
+        <div class="ph b5" style="height:400px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">The image she almost didn't let me take.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('boudoir',5)">
+        <div class="ph b6" style="height:270px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">Post-divorce. Chapter one.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('boudoir',6)">
+        <div class="ph b7" style="height:340px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">Gold hour. No filter.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('boudoir',7)">
+        <div class="ph b8" style="height:280px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">She was quiet for a long time.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('boudoir',8)">
+        <div class="ph b9" style="height:320px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">The version she didn't know existed.</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       GALLERY 2 — SWIMWEAR
+  ═══════════════════════════════════════════ -->
+  <section class="gallery-section" id="swimwear" style="background: var(--cream);">
+    <div class="gallery-header reveal">
+      <div>
+        <h2 class="gallery-section-title">Swim<em>wear</em></h2>
+      </div>
+      <p class="gallery-desc">
+        Sun, sea, skin. Swimwear sessions capture confidence in motion — whether studio-lit or shot on location across Australia's coast.
+      </p>
+    </div>
+    <div class="masonry reveal" id="swimwear-grid">
+
+      <div class="masonry-item" onclick="openLightbox('swimwear',0)">
+        <div class="ph s1" style="height:360px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">Byron Bay · golden hour.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('swimwear',1)">
+        <div class="ph s2" style="height:280px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">The water didn't ask her permission to be beautiful.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('swimwear',2)">
+        <div class="ph s3" style="height:310px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">Studio · linen · sea-light.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('swimwear',3)">
+        <div class="ph s4" style="height:290px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">She's been waiting for summer all year.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('swimwear',4)">
+        <div class="ph s5" style="height:380px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">Noosa Heads. First light.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('swimwear',5)">
+        <div class="ph s6" style="height:260px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">Entirely herself.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('swimwear',6)">
+        <div class="ph s7" style="height:330px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">The light in this country is different.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('swimwear',7)">
+        <div class="ph s8" style="height:295px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">Mornington · last hour of light.</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       GALLERY 3 — NUDE
+  ═══════════════════════════════════════════ -->
+  <section class="gallery-section" id="nude">
+    <div class="gallery-header reveal">
+      <div>
+        <h2 class="gallery-section-title">Fine Art <em>Nude</em></h2>
+      </div>
+      <p class="gallery-desc">
+        The body as subject. No artifice, no costume — just form, light, and presence. These sessions require the deepest trust, and produce the most enduring work.
+      </p>
+    </div>
+    <div class="masonry reveal" id="nude-grid">
+
+      <div class="masonry-item" onclick="openLightbox('nude',0)">
+        <div class="ph n1" style="height:400px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">Form. Light. Nothing else needed.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('nude',1)">
+        <div class="ph n2" style="height:280px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">The most honest portrait she'd ever allowed.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('nude',2)">
+        <div class="ph n3" style="height:320px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">Completely, finally, herself.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('nude',3)">
+        <div class="ph n4" style="height:370px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">The line between strength and softness.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('nude',4)">
+        <div class="ph n5" style="height:260px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">Not for anyone. For the record.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('nude',5)">
+        <div class="ph n6" style="height:305px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">Winter light. Melbourne studio.</span></div>
+      </div>
+
+      <div class="masonry-item" onclick="openLightbox('nude',6)">
+        <div class="ph n7" style="height:340px"></div>
+        <div class="masonry-overlay"><span class="masonry-caption">She existed magnificently.</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-inner" id="lightboxInner">
+      <div class="lightbox-img-ph" id="lightboxImg"></div>
+    </div>
+    <button class="lightbox-close" onclick="closeLightboxBtn()">✕</button>
+    <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1,event)">‹</button>
+    <button class="lightbox-nav lightbox-next" onclick="navLightbox(1,event)">›</button>
+    <div class="lightbox-caption-wrap">
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
+
+  <!-- ENQUIRY FORM -->
+  <section class="enquiry-section" id="enquire">
+    <div class="enquiry-inner">
+      <div class="enquiry-label">Book Your Session</div>
+      <h2 class="enquiry-heading">
+        Ready to see yourself<br>
+        <em>differently?</em>
+      </h2>
+      <p class="enquiry-sub">
+        Every enquiry is answered personally — usually within a few hours. 
+        Tell me which gallery spoke to you and what you're hoping to create. 
+        All conversations are entirely confidential.
+      </p>
+
+      <div class="form-grid">
+        <div class="form-row">
+          <input type="text" class="form-input" placeholder="Your Name" />
+          <input type="email" class="form-input" placeholder="Email Address" />
+        </div>
+        <div class="form-row">
+          <input type="tel" class="form-input" placeholder="Phone (optional)" />
+          <select class="form-input">
+            <option value="" disabled selected>Your City</option>
+            <option>Sydney, NSW</option>
+            <option>Melbourne, VIC</option>
+            <option>Brisbane, QLD</option>
+            <option>Perth, WA</option>
+            <option>Adelaide, SA</option>
+            <option>Regional / Other</option>
+          </select>
+        </div>
+        <div class="form-row-three">
+          <select class="form-input">
+            <option value="" disabled selected>Session type</option>
+            <option>Boudoir</option>
+            <option>Swimwear</option>
+            <option>Fine Art Nude</option>
+            <option>Not sure yet</option>
+          </select>
+          <select class="form-input">
+            <option value="" disabled selected>Package</option>
+            <option>The Intimate — from $490</option>
+            <option>The Signature — from $890</option>
+            <option>The Collection — from $1,490</option>
+            <option>Let's chat first</option>
+          </select>
+          <select class="form-input">
+            <option value="" disabled selected>How soon?</option>
+            <option>Within the month</option>
+            <option>Next 2–3 months</option>
+            <option>Just exploring</option>
+          </select>
+        </div>
+        <textarea class="form-input" placeholder="Tell me a little about what you're imagining for your session — or what made you reach out today…"></textarea>
+        <button class="form-submit" type="button" id="submitBtn">Send My Enquiry ◆</button>
+      </div>
+
+      <div class="enquiry-info">
+        <div class="info-item">
+          <div class="info-label">Email</div>
+          <div class="info-value">hello@felixdahauscat.com.au</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Based In</div>
+          <div class="info-value">Melbourne, Australia</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Instagram</div>
+          <div class="info-value">@felix.dahauscat</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="index.html" class="footer-logo">felixdahauscat</a>
+    <span class="footer-copy">© 2026 felixdahauscat · All rights reserved</span>
+    <div class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="#">Instagram</a>
+    </div>
+  </footer>
+
+  <script>
+    /* ─── Cursor ─── */
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    (function animateCursor() {
+      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+      rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animateCursor);
+    })();
+    document.querySelectorAll('a, button, .masonry-item').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(2.5)';
+        ring.style.transform = 'translate(-50%,-50%) scale(1.4)';
+        ring.style.borderColor = 'var(--gold)';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+        ring.style.transform = 'translate(-50%,-50%) scale(1)';
+        ring.style.borderColor = 'var(--blush)';
+      });
+    });
+
+    /* ─── Scroll reveal ─── */
+    const revealEls = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 60);
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    revealEls.forEach(el => obs.observe(el));
+
+    /* ─── Sticky tab highlight on scroll ─── */
+    const sections = ['boudoir','swimwear','nude'];
+    const tabs = document.querySelectorAll('.gallery-tab');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 160) current = id;
+      });
+      tabs.forEach(t => {
+        t.classList.toggle('active', t.dataset.tab === current);
+      });
+    });
+
+    /* ─── Lightbox ─── */
+    const galleries = {
+      boudoir: [
+        {color:'linear-gradient(160deg,#d4bfb0,#a08878)',caption:'She arrived with a list of things she wanted to hide.'},
+        {color:'linear-gradient(140deg,#e0cfc6,#b89888)',caption:'Soft light. No armour.'},
+        {color:'linear-gradient(170deg,#c4b0a4,#8a6858)',caption:'This is what 40 looks like when it stops apologising.'},
+        {color:'linear-gradient(150deg,#d8c8be,#9a7868)',caption:'For herself. For nobody else.'},
+        {color:'linear-gradient(165deg,#cebfb2,#907060)',caption:'The image she almost didn\'t let me take.'},
+        {color:'linear-gradient(145deg,#e4d4ca,#c0988a)',caption:'Post-divorce. Chapter one.'},
+        {color:'linear-gradient(155deg,#bfada0,#7a5c4e)',caption:'Gold hour. No filter.'},
+        {color:'linear-gradient(160deg,#daccbf,#a88070)',caption:'She was quiet for a long time.'},
+        {color:'linear-gradient(140deg,#c8b4a8,#886858)',caption:'The version she didn\'t know existed.'},
+      ],
+      swimwear: [
+        {color:'linear-gradient(160deg,#b8ccd8,#5c8098)',caption:'Byron Bay · golden hour.'},
+        {color:'linear-gradient(140deg,#c8d8dc,#7898a8)',caption:'The water didn\'t ask her permission to be beautiful.'},
+        {color:'linear-gradient(170deg,#d4c4a8,#907858)',caption:'Studio · linen · sea-light.'},
+        {color:'linear-gradient(150deg,#b4c8c0,#607870)',caption:'She\'s been waiting for summer all year.'},
+        {color:'linear-gradient(165deg,#d0c8b8,#887868)',caption:'Noosa Heads. First light.'},
+        {color:'linear-gradient(145deg,#a8c0c8,#486878)',caption:'Entirely herself.'},
+        {color:'linear-gradient(155deg,#c4b8a8,#807060)',caption:'The light in this country is different.'},
+        {color:'linear-gradient(160deg,#b8d0c8,#587868)',caption:'Mornington · last hour of light.'},
+      ],
+      nude: [
+        {color:'linear-gradient(160deg,#c8b8a8,#7a6858)',caption:'Form. Light. Nothing else needed.'},
+        {color:'linear-gradient(140deg,#d8c8b8,#9a8878)',caption:'The most honest portrait she\'d ever allowed.'},
+        {color:'linear-gradient(170deg,#b8a898,#685848)',caption:'Completely, finally, herself.'},
+        {color:'linear-gradient(150deg,#d0bca8,#8a7060)',caption:'The line between strength and softness.'},
+        {color:'linear-gradient(165deg,#c4b0a0,#806850)',caption:'Not for anyone. For the record.'},
+        {color:'linear-gradient(145deg,#dcc8b8,#a08878)',caption:'Winter light. Melbourne studio.'},
+        {color:'linear-gradient(155deg,#bfb0a0,#707060)',caption:'She existed magnificently.'},
+      ]
+    };
+
+    let currentGallery = '', currentIdx = 0;
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightboxImg');
+    const lbCap = document.getElementById('lightboxCaption');
+
+    function openLightbox(gallery, idx) {
+      currentGallery = gallery; currentIdx = idx;
+      const item = galleries[gallery][idx];
+      lbImg.style.background = item.color;
+      lbCap.textContent = item.caption;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightboxBtn() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function closeLightbox(e) {
+      if (e.target === lb) closeLightboxBtn();
+    }
+    function navLightbox(dir, e) {
+      e.stopPropagation();
+      const g = galleries[currentGallery];
+      currentIdx = (currentIdx + dir + g.length) % g.length;
+      const item = g[currentIdx];
+      lbImg.style.background = item.color;
+      lbCap.textContent = item.caption;
+    }
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightboxBtn();
+      if (e.key === 'ArrowRight') navLightbox(1, { stopPropagation: ()=>{} });
+      if (e.key === 'ArrowLeft') navLightbox(-1, { stopPropagation: ()=>{} });
+    });
+
+    /* ─── Form ─── */
+    document.getElementById('submitBtn').addEventListener('click', function() {
+      this.textContent = 'Enquiry sent — I\'ll be in touch soon ✦';
+      this.style.background = 'var(--gold)';
+      this.style.color = 'var(--deep-mocha)';
+      this.disabled = true;
+    });
+  </script>
+</body>
+</html>
