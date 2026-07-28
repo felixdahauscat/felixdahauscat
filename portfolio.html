@@ -11,16 +11,16 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream: #f5f0e8;
-      --warm-white: #fdfaf5;
-      --blush: #c9a99a;
-      --dusty-rose: #b08070;
-      --deep-mocha: #2a1f1a;
-      --mid-brown: #5c3d30;
-      --gold: #c4a96d;
-      --gold-light: #e8d5a3;
-      --text: #2a1f1a;
-      --text-light: #7a6258;
+      --cream: #f2ece0;
+      --warm-white: #e8d4a8;
+      --blush: #c89888;
+      --dusty-rose: #9a5040;
+      --deep-mocha: #080604;
+      --mid-brown: #2e2218;
+      --gold: #c49038;
+      --gold-light: #ddb86a;
+      --text: #221a12;
+      --text-light: #725f4c;
     }
 
     html { scroll-behavior: smooth; }
@@ -57,9 +57,9 @@
       position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 28px 52px;
-      background: rgba(253,250,245,0.95);
+      background: rgba(232,212,168,0.95);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(201,169,154,0.15);
+      border-bottom: 1px solid rgba(196,144,56,0.18);
     }
     .nav-logo {
       font-family: 'Cormorant Garamond', serif;
@@ -88,7 +88,7 @@
     }
     .page-hero-bg {
       position: absolute; inset: 0;
-      background: linear-gradient(135deg, #2a1f1a 0%, #3d2820 40%, #5c3030 100%);
+      background: linear-gradient(135deg, #080604 0%, #1a1510 45%, #2e2218 100%);
     }
     .page-hero-pattern {
       position: absolute; inset: 0;
@@ -96,15 +96,15 @@
         45deg,
         transparent,
         transparent 40px,
-        rgba(196,169,109,0.03) 40px,
-        rgba(196,169,109,0.03) 41px
+        rgba(196,144,56,0.04) 40px,
+        rgba(196,144,56,0.04) 41px
       );
     }
     .page-hero-orb {
       position: absolute;
       width: 500px; height: 500px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(176,128,112,0.12) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(154,80,64,0.14) 0%, transparent 70%);
       right: -100px; top: -100px;
     }
     .page-hero-content {
@@ -113,7 +113,7 @@
     }
     .breadcrumb {
       font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(245,240,232,0.4); margin-bottom: 14px; font-weight: 300;
+      color: rgba(242,236,224,0.4); margin-bottom: 14px; font-weight: 300;
       display: flex; align-items: center; gap: 10px;
     }
     .breadcrumb a { color: inherit; text-decoration: none; transition: color 0.3s; }
@@ -128,15 +128,15 @@
     .page-subtitle {
       margin-top: 14px;
       font-size: 0.75rem; font-weight: 200; letter-spacing: 0.15em;
-      color: rgba(245,240,232,0.45);
+      color: rgba(242,236,224,0.45);
     }
 
     /* GALLERY NAV TABS */
     .gallery-nav {
       position: sticky; top: 85px; z-index: 90;
-      background: rgba(253,250,245,0.97);
+      background: rgba(232,212,168,0.97);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(201,169,154,0.2);
+      border-bottom: 1px solid rgba(196,144,56,0.2);
       display: flex; align-items: center;
       padding: 0 52px;
       gap: 0;
@@ -164,7 +164,7 @@
     /* GALLERY SECTIONS */
     .gallery-section {
       padding: 80px 52px;
-      border-bottom: 1px solid rgba(201,169,154,0.12);
+      border-bottom: 1px solid rgba(196,144,56,0.18);
     }
     .gallery-section:last-of-type { border-bottom: none; }
 
@@ -213,7 +213,7 @@
 
     .masonry-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(42,31,26,0.65) 0%, transparent 50%);
+      background: linear-gradient(to top, rgba(8,6,4,0.7) 0%, transparent 50%);
       opacity: 0; transition: opacity 0.4s;
       display: flex; align-items: flex-end;
       padding: 20px;
@@ -222,13 +222,13 @@
     .masonry-caption {
       font-family: 'Cormorant Garamond', serif;
       font-size: 0.9rem; font-style: italic; font-weight: 300;
-      color: rgba(245,240,232,0.9);
+      color: rgba(242,236,224,0.9);
     }
 
     /* Lightbox */
     .lightbox {
       position: fixed; inset: 0; z-index: 1000;
-      background: rgba(42,31,26,0.96);
+      background: rgba(8,6,4,0.96);
       display: flex; align-items: center; justify-content: center;
       opacity: 0; pointer-events: none;
       transition: opacity 0.4s;
@@ -254,7 +254,7 @@
       border-radius: 50%; cursor: none;
       display: flex; align-items: center; justify-content: center;
       background: transparent; transition: all 0.3s;
-      color: rgba(245,240,232,0.6); font-size: 1.2rem;
+      color: rgba(242,236,224,0.6); font-size: 1.2rem;
     }
     .lightbox-close:hover {
       border-color: var(--blush); color: var(--cream);
@@ -268,7 +268,7 @@
     .lightbox-caption {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1rem; font-style: italic; font-weight: 300;
-      color: rgba(245,240,232,0.6);
+      color: rgba(242,236,224,0.6);
       letter-spacing: 0.1em;
     }
     .lightbox-nav {
@@ -278,7 +278,7 @@
       border-radius: 50%; cursor: none;
       display: flex; align-items: center; justify-content: center;
       background: transparent; transition: all 0.3s;
-      color: rgba(245,240,232,0.5); font-size: 1rem;
+      color: rgba(242,236,224,0.5); font-size: 1rem;
     }
     .lightbox-nav:hover { border-color: var(--blush); color: var(--cream); }
     .lightbox-prev { left: 24px; }
@@ -327,14 +327,14 @@
       content: '';
       position: absolute;
       width: 700px; height: 700px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(196,169,109,0.06) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(196,144,56,0.08) 0%, transparent 70%);
       top: -200px; right: -200px; pointer-events: none;
     }
     .enquiry-section::after {
       content: '';
       position: absolute;
       width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(176,128,112,0.07) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(154,80,64,0.09) 0%, transparent 70%);
       bottom: -150px; left: -100px; pointer-events: none;
     }
     .enquiry-inner {
@@ -358,7 +358,7 @@
     .enquiry-heading em { font-style: italic; color: var(--blush); }
     .enquiry-sub {
       font-size: 0.78rem; font-weight: 200; letter-spacing: 0.1em;
-      color: rgba(245,240,232,0.45); margin-bottom: 56px;
+      color: rgba(242,236,224,0.45); margin-bottom: 56px;
       line-height: 2; max-width: 520px;
     }
     .form-grid { display: grid; gap: 14px; }
@@ -372,7 +372,7 @@
       outline: none; transition: border-color 0.3s; appearance: none;
       border-radius: 0;
     }
-    .form-input::placeholder { color: rgba(245,240,232,0.25); }
+    .form-input::placeholder { color: rgba(242,236,224,0.25); }
     .form-input:focus { border-color: var(--blush); }
     textarea.form-input { resize: none; min-height: 130px; }
     select.form-input option { background: var(--deep-mocha); }
@@ -406,22 +406,22 @@
 
     /* FOOTER */
     footer {
-      background: #1a100d; padding: 32px 52px;
+      background: #050403; padding: 32px 52px;
       display: flex; justify-content: space-between; align-items: center;
     }
     .footer-logo {
       font-family: 'Cormorant Garamond', serif; font-size: 0.9rem;
-      letter-spacing: 0.2em; color: rgba(245,240,232,0.35);
+      letter-spacing: 0.2em; color: rgba(242,236,224,0.35);
       font-weight: 300; text-decoration: none;
     }
     .footer-copy {
       font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: rgba(245,240,232,0.18); font-weight: 200;
+      color: rgba(242,236,224,0.18); font-weight: 200;
     }
     .footer-links { display: flex; gap: 24px; }
     .footer-links a {
       font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: rgba(245,240,232,0.22); text-decoration: none; font-weight: 200;
+      color: rgba(242,236,224,0.22); text-decoration: none; font-weight: 200;
       transition: color 0.3s;
     }
     .footer-links a:hover { color: var(--blush); }
@@ -483,7 +483,8 @@
     <ul class="nav-links">
       <li><a href="index.html#philosophy">Philosophy</a></li>
       <li><a href="portfolio.html" class="active">Portfolio</a></li>
-      <li><a href="index.html#packages">Packages</a></li>
+      <li><a href="index.html#gallery">Gallery</a></li>
+      <li><a href="index.html#Collections">Collections</a></li>
       <li><a href="index.html#about">About</a></li>
       <li><a href="#enquire">Book Now</a></li>
     </ul>
