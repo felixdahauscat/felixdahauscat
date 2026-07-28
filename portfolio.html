@@ -197,7 +197,7 @@
     }
     .masonry-item:nth-child(3n+1) { margin-top: 0; }
     .masonry-thumb {
-      width: 100%; display: block;
+      width: 100%; height: auto; display: block;
       transition: transform 0.7s cubic-bezier(.23,1,.32,1);
     }
     .masonry-item:hover .masonry-thumb { transform: scale(1.05); }
@@ -237,9 +237,11 @@
       position: relative; max-width: 80vw; max-height: 85vh;
     }
     .lightbox-img {
+      width: auto; height: auto;
       max-width: 80vw; max-height: 85vh;
       object-fit: contain; display: block;
     }
+    .lightbox-img[hidden], .lightbox-img-ph[hidden] { display: none; }
     .lightbox-img-ph {
       width: 500px; max-width: 80vw; height: 600px; max-height: 85vh;
       display: flex; align-items: center; justify-content: center;
@@ -544,27 +546,27 @@
     <div class="masonry reveal" id="boudoir-grid">
 
       <div class="masonry-item" onclick="openLightbox('boudoir',0)">
-        <img src="images/boudoir-01.jpg" style="width:100%;display:block;" alt="">
+        <img class="masonry-thumb" src="assets/images/boudoir-01.jpg" width="1290" height="725" loading="lazy" decoding="async" alt="Boudoir portfolio portrait by felixdahauscat">
         <div class="masonry-overlay"><span class="masonry-caption">She arrived with a list of things she wanted to hide.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('boudoir',1)">
-        <img src="images/boudoir-02.jpg" style="width:100%;display:block;" alt="">
+        <img class="masonry-thumb" src="assets/images/boudoir-02.jpg" width="1000" height="1499" loading="lazy" decoding="async" alt="Boudoir portfolio portrait by felixdahauscat">
         <div class="masonry-overlay"><span class="masonry-caption">Soft light. No armour.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('boudoir',2)">
-       <img src="images/boudoir-03.jpg" style="width:100%;display:block;" alt="">
+        <img class="masonry-thumb" src="assets/images/boudoir-03.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Boudoir portfolio portrait by felixdahauscat">
         <div class="masonry-overlay"><span class="masonry-caption">This is what 40 looks like when it stops apologising.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('boudoir',3)">
-        <img src="images/boudoir-04.jpg" style="width:100%;display:block;" alt="">
+        <img class="masonry-thumb" src="assets/images/boudoir-04.jpg" width="1728" height="1080" loading="lazy" decoding="async" alt="Boudoir portfolio portrait by felixdahauscat">
         <div class="masonry-overlay"><span class="masonry-caption">For herself. For nobody else.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('boudoir',4)">
-        <img src="images/boudoir-05.jpg" style="width:100%;display:block;" alt="">
+        <img class="masonry-thumb" src="assets/images/boudoir-05.JPG" width="1080" height="1350" loading="lazy" decoding="async" alt="Boudoir portfolio portrait by felixdahauscat">
         <div class="masonry-overlay"><span class="masonry-caption">The image she almost didn't let me take.</span></div>
       </div>
 
@@ -703,7 +705,8 @@
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
     <div class="lightbox-inner" id="lightboxInner">
-      <div class="lightbox-img-ph" id="lightboxImg"></div>
+      <img class="lightbox-img" id="lightboxImg" alt="" hidden>
+      <div class="lightbox-img-ph" id="lightboxPlaceholder"></div>
     </div>
     <button class="lightbox-close" onclick="closeLightboxBtn()">✕</button>
     <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1,event)">‹</button>
@@ -852,11 +855,11 @@
     /* ─── Lightbox ─── */
     const galleries = {
       boudoir: [
-        {color:'linear-gradient(160deg,#d4bfb0,#a08878)',caption:'She arrived with a list of things she wanted to hide.'},
-        {color:'linear-gradient(140deg,#e0cfc6,#b89888)',caption:'Soft light. No armour.'},
-        {color:'linear-gradient(170deg,#c4b0a4,#8a6858)',caption:'This is what 40 looks like when it stops apologising.'},
-        {color:'linear-gradient(150deg,#d8c8be,#9a7868)',caption:'For herself. For nobody else.'},
-        {color:'linear-gradient(165deg,#cebfb2,#907060)',caption:'The image she almost didn\'t let me take.'},
+        {image:'assets/images/boudoir-01.jpg',caption:'She arrived with a list of things she wanted to hide.'},
+        {image:'assets/images/boudoir-02.jpg',caption:'Soft light. No armour.'},
+        {image:'assets/images/boudoir-03.jpg',caption:'This is what 40 looks like when it stops apologising.'},
+        {image:'assets/images/boudoir-04.jpg',caption:'For herself. For nobody else.'},
+        {image:'assets/images/boudoir-05.JPG',caption:'The image she almost didn\'t let me take.'},
         {color:'linear-gradient(145deg,#e4d4ca,#c0988a)',caption:'Post-divorce. Chapter one.'},
         {color:'linear-gradient(155deg,#bfada0,#7a5c4e)',caption:'Gold hour. No filter.'},
         {color:'linear-gradient(160deg,#daccbf,#a88070)',caption:'She was quiet for a long time.'},
@@ -886,13 +889,29 @@
     let currentGallery = '', currentIdx = 0;
     const lb = document.getElementById('lightbox');
     const lbImg = document.getElementById('lightboxImg');
+    const lbPlaceholder = document.getElementById('lightboxPlaceholder');
     const lbCap = document.getElementById('lightboxCaption');
+
+    function renderLightboxItem(item) {
+      if (item.image) {
+        lbImg.src = item.image;
+        lbImg.alt = item.caption;
+        lbImg.hidden = false;
+        lbPlaceholder.hidden = true;
+      } else {
+        lbImg.hidden = true;
+        lbImg.removeAttribute('src');
+        lbImg.alt = '';
+        lbPlaceholder.style.background = item.color;
+        lbPlaceholder.hidden = false;
+      }
+      lbCap.textContent = item.caption;
+    }
 
     function openLightbox(gallery, idx) {
       currentGallery = gallery; currentIdx = idx;
       const item = galleries[gallery][idx];
-      lbImg.style.background = item.color;
-      lbCap.textContent = item.caption;
+      renderLightboxItem(item);
       lb.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
@@ -908,8 +927,7 @@
       const g = galleries[currentGallery];
       currentIdx = (currentIdx + dir + g.length) % g.length;
       const item = g[currentIdx];
-      lbImg.style.background = item.color;
-      lbCap.textContent = item.caption;
+      renderLightboxItem(item);
     }
     document.addEventListener('keydown', e => {
       if (!lb.classList.contains('open')) return;
