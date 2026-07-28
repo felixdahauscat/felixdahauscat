@@ -197,7 +197,8 @@
     }
     .masonry-item:nth-child(3n+1) { margin-top: 0; }
     .masonry-thumb {
-      width: 100%; height: auto; display: block;
+      width: 100%; max-width: 100%; height: auto; display: block;
+      object-fit: contain;
       transition: transform 0.7s cubic-bezier(.23,1,.32,1);
     }
     .masonry-item:hover .masonry-thumb { transform: scale(1.05); }
@@ -571,22 +572,22 @@
       </div>
 
       <div class="masonry-item" onclick="openLightbox('boudoir',5)">
-         <img class="masonry-thumb" src="assets/images/boudoir-06.JPG" width="1080" height="1350" loading="lazy" decoding="async" alt="Boudoir portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/boudoir-06.jpg" width="1000" height="1250" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Boudoir portfolio portrait by felixdahauscat">
         <div class="masonry-overlay"><span class="masonry-caption">Post-divorce. Chapter one.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('boudoir',6)">
-        < <img class="masonry-thumb" src="assets/images/boudoir-07.JPG" width="1080" height="1350" loading="lazy" decoding="async" alt="Boudoir portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/boudoir-07.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Boudoir portfolio portrait by felixdahauscat">
         <div class="masonry-overlay"><span class="masonry-caption">Gold hour. No filter.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('boudoir',7)">
-         <img class="masonry-thumb" src="assets/images/boudoir-08.JPG" width="1080" height="1350" loading="lazy" decoding="async" alt="Boudoir portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/boudoir-08.jpg" width="1000" height="1250" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Boudoir portfolio portrait by felixdahauscat">
         <div class="masonry-overlay"><span class="masonry-caption">She was quiet for a long time.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('boudoir',8)">
-         <img class="masonry-thumb" src="assets/images/boudoir-09.JPG" width="1080" height="1350" loading="lazy" decoding="async" alt="Boudoir portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/boudoir-09.jpg" width="1000" height="1250" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Boudoir portfolio portrait by felixdahauscat">
         <div class="masonry-overlay"><span class="masonry-caption">The version she didn't know existed.</span></div>
       </div>
 
@@ -860,10 +861,10 @@
         {image:'assets/images/boudoir-03.jpg',caption:'This is what 40 looks like when it stops apologising.'},
         {image:'assets/images/boudoir-04.jpg',caption:'For herself. For nobody else.'},
         {image:'assets/images/boudoir-05.JPG',caption:'The image she almost didn\'t let me take.'},
-        {color:'linear-gradient(145deg,#e4d4ca,#c0988a)',caption:'Post-divorce. Chapter one.'},
-        {color:'linear-gradient(155deg,#bfada0,#7a5c4e)',caption:'Gold hour. No filter.'},
-        {color:'linear-gradient(160deg,#daccbf,#a88070)',caption:'She was quiet for a long time.'},
-        {color:'linear-gradient(140deg,#c8b4a8,#886858)',caption:'The version she didn\'t know existed.'},
+        {image:'assets/images/boudoir-06.jpg',caption:'Post-divorce. Chapter one.'},
+        {image:'assets/images/boudoir-07.jpg',caption:'Gold hour. No filter.'},
+        {image:'assets/images/boudoir-08.jpg',caption:'She was quiet for a long time.'},
+        {image:'assets/images/boudoir-09.jpg',caption:'The version she didn\'t know existed.'},
       ],
       swimwear: [
         {color:'linear-gradient(160deg,#b8ccd8,#5c8098)',caption:'Byron Bay · golden hour.'},
