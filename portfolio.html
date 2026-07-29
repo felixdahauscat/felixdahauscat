@@ -56,31 +56,35 @@
     nav {
       position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 28px 52px;
-      background: rgba(232,212,168,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(196,144,56,0.18);
+      padding: 28px 60px;
+    }
+    nav::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(8,6,4,0.72), transparent);
+      pointer-events: none;
     }
     .nav-logo {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.05rem; font-weight: 400;
       letter-spacing: 0.25em; text-transform: lowercase;
-      color: var(--deep-mocha); text-decoration: none;
+      color: var(--cream); text-decoration: none;
+      position: relative;
     }
-    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
+    .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; position: relative; }
     .nav-links a {
       font-size: 0.68rem; letter-spacing: 0.2em;
       text-transform: uppercase; text-decoration: none;
-      color: var(--mid-brown); font-weight: 300; transition: color 0.3s;
+      color: rgba(242,236,224,0.66); font-weight: 300; transition: color 0.3s;
     }
-    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold-light); }
     .nav-links .breadcrumb-sep {
       color: var(--blush); font-size: 0.6rem; opacity: 0.6;
     }
 
     /* HERO BANNER */
     .page-hero {
-      margin-top: 85px;
+      margin-top: 0;
       height: 42vh; min-height: 300px;
       display: flex; align-items: flex-end;
       position: relative; overflow: hidden;
@@ -124,7 +128,7 @@
       font-size: clamp(3rem, 6vw, 5.5rem);
       font-weight: 300; color: var(--cream); line-height: 1;
     }
-    .page-title em { font-style: italic; color: var(--blush); }
+    .page-title em { font-style: italic; color: var(--gold-light); }
     .page-subtitle {
       margin-top: 14px;
       font-size: 0.75rem; font-weight: 200; letter-spacing: 0.15em;
@@ -167,6 +171,21 @@
       border-bottom: 1px solid rgba(196,144,56,0.18);
     }
     .gallery-section:last-of-type { border-bottom: none; }
+    #boudoir {
+      background:
+        radial-gradient(circle at 12% 8%, rgba(196,144,56,0.06), transparent 28%),
+        var(--charcoal);
+    }
+    #swimwear {
+      background:
+        radial-gradient(circle at 88% 18%, rgba(196,144,56,0.08), transparent 30%),
+        var(--deep-mocha);
+    }
+    #nude {
+      background:
+        radial-gradient(circle at 18% 82%, rgba(154,80,64,0.08), transparent 32%),
+        var(--charcoal);
+    }
 
     .gallery-header {
       display: flex; justify-content: space-between; align-items: flex-end;
@@ -175,12 +194,15 @@
     .gallery-section-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(2rem, 3.5vw, 3.2rem);
-      font-weight: 300; color: var(--deep-mocha); line-height: 1;
+      font-weight: 300; color: var(--cream); line-height: 1;
     }
-    .gallery-section-title em { font-style: italic; color: var(--dusty-rose); }
+    .gallery-section-title em { font-style: italic; color: var(--gold-light); }
+    #boudoir .gallery-section-title,
+    #nude .gallery-section-title { color: var(--deep-mocha); }
+    #nude .gallery-section-title em { color: var(--gold-light); }
     .gallery-desc {
       font-size: 0.75rem; font-weight: 200; letter-spacing: 0.08em;
-      color: var(--text-light); max-width: 320px; line-height: 1.9;
+      color: rgba(232,212,168,0.58); max-width: 320px; line-height: 1.9;
       text-align: right;
     }
 
@@ -598,7 +620,7 @@
   <!-- ═══════════════════════════════════════════
        GALLERY 2 — SWIMWEAR
   ═══════════════════════════════════════════ -->
-  <section class="gallery-section" id="swimwear" style="background: var(--cream);">
+  <section class="gallery-section" id="swimwear">
     <div class="gallery-header reveal">
       <div>
         <h2 class="gallery-section-title">Swim<em>wear</em></h2>
