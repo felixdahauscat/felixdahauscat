@@ -492,6 +492,97 @@
     @media (max-width: 540px) {
       .masonry { columns: 1; }
     }
+
+    /* ===== Mobile hamburger menu ===== */
+    .nav-toggle {
+      display: none;
+      position: relative; z-index: 2;
+      width: 44px; height: 44px; margin-right: -8px;
+      align-items: center; justify-content: center;
+      background: none; border: 0; padding: 0;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-toggle-bars { position: relative; width: 26px; height: 14px; }
+    .nav-toggle-bars span {
+      position: absolute; left: 0;
+      display: block; width: 100%; height: 1px;
+      background: var(--cream);
+      transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.25s ease, background 0.3s ease, width 0.3s ease;
+    }
+    .nav-toggle-bars span:nth-child(1) { top: 0; }
+    .nav-toggle-bars span:nth-child(2) { top: 50%; width: 68%; }
+    .nav-toggle-bars span:nth-child(3) { bottom: 0; }
+    .nav-toggle[aria-expanded="true"] .nav-toggle-bars span { background: var(--gold-light); }
+    .nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(1) { top: 50%; transform: rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(2) { opacity: 0; transform: translateX(10px); }
+    .nav-toggle[aria-expanded="true"] .nav-toggle-bars span:nth-child(3) { bottom: 50%; transform: rotate(-45deg); }
+
+    .mobile-menu {
+      position: fixed; inset: 0; z-index: 150;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 104px 28px 44px;
+      background:
+        radial-gradient(circle at 82% 12%, rgba(196, 144, 56, 0.13), transparent 45%),
+        var(--deep-mocha);
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.45s cubic-bezier(0.25,0.46,0.45,0.94), visibility 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+      overflow-y: auto;
+    }
+    .mobile-menu.open { opacity: 1; visibility: visible; }
+    .mobile-menu-links { list-style: none; }
+    .mobile-menu-links li {
+      opacity: 0; transform: translateY(18px);
+      transition: opacity 0.5s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
+      border-bottom: 1px solid rgba(196, 144, 56, 0.18);
+    }
+    .mobile-menu.open .mobile-menu-links li { opacity: 1; transform: translateY(0); }
+    .mobile-menu.open .mobile-menu-links li:nth-child(1) { transition-delay: 0.10s; }
+    .mobile-menu.open .mobile-menu-links li:nth-child(2) { transition-delay: 0.16s; }
+    .mobile-menu.open .mobile-menu-links li:nth-child(3) { transition-delay: 0.22s; }
+    .mobile-menu.open .mobile-menu-links li:nth-child(4) { transition-delay: 0.28s; }
+    .mobile-menu.open .mobile-menu-links li:nth-child(5) { transition-delay: 0.34s; }
+    .mobile-menu.open .mobile-menu-links li:nth-child(6) { transition-delay: 0.40s; }
+    .mobile-menu-links a {
+      display: block; padding: 20px 2px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.85rem; font-weight: 300; letter-spacing: 0.02em;
+      color: var(--cream); text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .mobile-menu-links a .idx {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.56rem; letter-spacing: 0.22em;
+      color: var(--gold); margin-right: 14px;
+      vertical-align: 0.5em;
+    }
+    .mobile-menu-links a:hover, .mobile-menu-links a:focus-visible, .mobile-menu-links a.active { color: var(--gold-light); }
+    .mobile-menu-footer {
+      margin-top: 40px;
+      font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase;
+      color: rgba(232, 212, 168, 0.42);
+    }
+
+    body.menu-open { overflow: hidden; }
+    body.menu-open nav { background: transparent !important; box-shadow: none !important; backdrop-filter: none !important; }
+    body.menu-open nav::before { opacity: 0; }
+    nav::before { transition: opacity 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
+
+    @media (max-width: 900px) {
+      nav { z-index: 200; }
+      .nav-toggle { display: flex; }
+    }
+    @media (min-width: 901px) {
+      .mobile-menu { display: none; }
+    }
+    @media (pointer: coarse) {
+      body, a, button { cursor: auto; }
+      .cursor, .cursor-ring { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 <body>
@@ -510,7 +601,26 @@
       <li><a href="index.html#about">About</a></li>
       <li><a href="#enquire">Book Now</a></li>
     </ul>
+    <button class="nav-toggle" id="navToggle" type="button"
+            aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span class="nav-toggle-bars" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+    </button>
   </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-menu-links">
+      <li><a href="index.html#philosophy"><span class="idx">01</span>Philosophy</a></li>
+      <li><a href="portfolio.html" class="active"><span class="idx">02</span>Portfolio</a></li>
+      <li><a href="index.html#gallery"><span class="idx">03</span>Gallery</a></li>
+      <li><a href="index.html#Collections"><span class="idx">04</span>Collections</a></li>
+      <li><a href="index.html#about"><span class="idx">05</span>About</a></li>
+      <li><a href="#enquire"><span class="idx">06</span>Book Now</a></li>
+    </ul>
+    <div class="mobile-menu-footer">Boudoir Photography · Australia</div>
+  </div>
 
   <!-- PAGE HERO -->
   <section class="page-hero">
@@ -971,6 +1081,39 @@
       if (e.key === 'ArrowRight') navLightbox(1, { stopPropagation: ()=>{} });
       if (e.key === 'ArrowLeft') navLightbox(-1, { stopPropagation: ()=>{} });
     });
+
+    /* ─── Mobile hamburger menu ─── */
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const menu = document.getElementById('mobileMenu');
+      if (!toggle || !menu) return;
+
+      function setMenu(open) {
+        menu.classList.toggle('open', open);
+        document.body.classList.toggle('menu-open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      }
+
+      toggle.addEventListener('click', () => {
+        setMenu(toggle.getAttribute('aria-expanded') !== 'true');
+      });
+
+      menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => setMenu(false));
+      });
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+          setMenu(false);
+          toggle.focus();
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 900) setMenu(false);
+      });
+    })();
 
     /* ─── Form ─── */
     document.getElementById('submitBtn').addEventListener('click', function() {
