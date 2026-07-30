@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://felixdahauscat.com/sitemap.xml
+Sitemap: https://www.felixdahauscat.com/sitemap.xml

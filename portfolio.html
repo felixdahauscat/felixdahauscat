@@ -1,9 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio — felixdahauscat</title>
+  <title>Exclusive Boudoir Photography Portfolio | Felix Da HAUS Cat</title>
+  <meta name="description" content="Explore exclusive photography across boudoir, swimwear and fine art nude portrait galleries, created in a secure and private studio setting." />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="author" content="Felix Da HAUS Cat" />
+  <link rel="canonical" href="https://www.felixdahauscat.com/portfolio" />
+  <link rel="icon" href="/assets/images/hero-top-right.jpg" type="image/jpeg" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Felix Da HAUS Cat" />
+  <meta property="og:title" content="Exclusive Boudoir Photography Portfolio | Felix Da HAUS Cat" />
+  <meta property="og:description" content="Explore exclusive photography across boudoir, swimwear and fine art nude portrait galleries, created in a secure and private studio setting." />
+  <meta property="og:url" content="https://www.felixdahauscat.com/portfolio" />
+  <meta property="og:locale" content="en_AU" />
+  <meta property="og:image" content="https://www.felixdahauscat.com/assets/images/boudoir-01.jpg" />
+  <meta property="og:image:width" content="1290" />
+  <meta property="og:image:height" content="725" />
+  <meta property="og:image:alt" content="Exclusive boudoir photography portfolio by Felix Da HAUS Cat" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@felixdahauscat" />
+  <meta name="twitter:title" content="Exclusive Boudoir Photography Portfolio | Felix Da HAUS Cat" />
+  <meta name="twitter:description" content="Explore exclusive photography across boudoir, swimwear and fine art nude portrait galleries, created in a secure and private studio setting." />
+  <meta name="twitter:image" content="https://www.felixdahauscat.com/assets/images/boudoir-01.jpg" />
+  <meta name="twitter:image:alt" content="Exclusive boudoir photography portfolio by Felix Da HAUS Cat" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.felixdahauscat.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Portfolio",
+            "item": "https://www.felixdahauscat.com/portfolio"
+          }
+        ]
+      },
+      {
+        "@type": "ImageGallery",
+        "@id": "https://www.felixdahauscat.com/portfolio#gallery",
+        "name": "Exclusive Boudoir Photography Portfolio",
+        "description": "Boudoir, swimwear and fine art nude photography portfolio by Felix Da HAUS Cat.",
+        "url": "https://www.felixdahauscat.com/portfolio",
+        "associatedMedia": [
+          {
+            "@type": "ImageObject",
+            "contentUrl": "https://www.felixdahauscat.com/assets/images/boudoir-01.jpg",
+            "caption": "Boudoir portrait from the Felix Da HAUS Cat portfolio"
+          },
+          {
+            "@type": "ImageObject",
+            "contentUrl": "https://www.felixdahauscat.com/assets/images/swimwear-01.jpg",
+            "caption": "Swimwear portrait from the Felix Da HAUS Cat portfolio"
+          },
+          {
+            "@type": "ImageObject",
+            "contentUrl": "https://www.felixdahauscat.com/assets/images/nude-01.jpg",
+            "caption": "Fine art nude portrait from the Felix Da HAUS Cat portfolio"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
@@ -590,15 +662,16 @@
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
+  <header>
   <!-- NAV -->
-  <nav>
-    <a href="index.html" class="nav-logo">felixdahauscat</a>
+  <nav aria-label="Primary navigation">
+    <a href="/" class="nav-logo">felixdahauscat</a>
     <ul class="nav-links">
-      <li><a href="index.html#philosophy">Philosophy</a></li>
-      <li><a href="portfolio.html" class="active">Portfolio</a></li>
-      <li><a href="index.html#gallery">Gallery</a></li>
-      <li><a href="index.html#Collections">Collections</a></li>
-      <li><a href="index.html#about">About</a></li>
+      <li><a href="/#philosophy">Philosophy</a></li>
+      <li><a href="/portfolio" class="active" aria-current="page">Portfolio</a></li>
+      <li><a href="/#gallery">Gallery</a></li>
+      <li><a href="/#Collections">Collections</a></li>
+      <li><a href="/#about">About</a></li>
       <li><a href="#enquire">Book Now</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" type="button"
@@ -612,15 +685,18 @@
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
     <ul class="mobile-menu-links">
-      <li><a href="index.html#philosophy"><span class="idx">01</span>Philosophy</a></li>
-      <li><a href="portfolio.html" class="active"><span class="idx">02</span>Portfolio</a></li>
-      <li><a href="index.html#gallery"><span class="idx">03</span>Gallery</a></li>
-      <li><a href="index.html#Collections"><span class="idx">04</span>Collections</a></li>
-      <li><a href="index.html#about"><span class="idx">05</span>About</a></li>
+      <li><a href="/#philosophy"><span class="idx">01</span>Philosophy</a></li>
+      <li><a href="/portfolio" class="active" aria-current="page"><span class="idx">02</span>Portfolio</a></li>
+      <li><a href="/#gallery"><span class="idx">03</span>Gallery</a></li>
+      <li><a href="/#Collections"><span class="idx">04</span>Collections</a></li>
+      <li><a href="/#about"><span class="idx">05</span>About</a></li>
       <li><a href="#enquire"><span class="idx">06</span>Book Now</a></li>
     </ul>
     <div class="mobile-menu-footer">Boudoir Photography · Australia</div>
   </div>
+  </header>
+
+  <main>
 
   <!-- PAGE HERO -->
   <section class="page-hero">
@@ -628,11 +704,11 @@
     <div class="page-hero-pattern"></div>
     <div class="page-hero-orb"></div>
     <div class="page-hero-content">
-      <div class="breadcrumb">
-        <a href="index.html">Home</a>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
         <span class="breadcrumb-sep">›</span>
-        <span>Portfolio</span>
-      </div>
+        <span aria-current="page">Portfolio</span>
+      </nav>
       <h1 class="page-title">Selected <em>work</em></h1>
       <p class="page-subtitle">Boudoir · Swimwear · Nude &nbsp;·&nbsp; Australia-wide</p>
     </div>
@@ -659,16 +735,16 @@
   </div>
 
   <!-- STICKY GALLERY TABS -->
-  <div class="gallery-nav" id="galleryNav">
+  <nav class="gallery-nav" id="galleryNav" aria-label="Portfolio categories">
     <a href="#boudoir" class="gallery-tab active" data-tab="boudoir">Boudoir <span class="gallery-count">9</span></a>
     <a href="#swimwear" class="gallery-tab" data-tab="swimwear">Swimwear <span class="gallery-count">8</span></a>
     <a href="#nude" class="gallery-tab" data-tab="nude">Nude <span class="gallery-count">9</span></a>
-  </div>
+  </nav>
 
   <!-- ═══════════════════════════════════════════
        GALLERY 1 — BOUDOIR
   ═══════════════════════════════════════════ -->
-  <section class="gallery-section" id="boudoir">
+  <article class="gallery-section" id="boudoir">
     <div class="gallery-header reveal">
       <div>
         <h2 class="gallery-section-title">Boudoir</h2>
@@ -680,57 +756,57 @@
     <div class="masonry reveal" id="boudoir-grid">
 
       <div class="masonry-item" onclick="openLightbox('boudoir',0)">
-        <img class="masonry-thumb" src="assets/images/boudoir-01.jpg" width="1290" height="725" loading="lazy" decoding="async" alt="Boudoir portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/boudoir-01.jpg" width="1290" height="725" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Boudoir portrait: She arrived with a list of things she wanted to hide.">
         <div class="masonry-overlay"><span class="masonry-caption">She arrived with a list of things she wanted to hide.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('boudoir',1)">
-        <img class="masonry-thumb" src="assets/images/boudoir-02.jpg" width="1000" height="1499" loading="lazy" decoding="async" alt="Boudoir portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/boudoir-02.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Boudoir portrait in soft light with no armour.">
         <div class="masonry-overlay"><span class="masonry-caption">Soft light. No armour.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('boudoir',2)">
-        <img class="masonry-thumb" src="assets/images/boudoir-03.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="Boudoir portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/boudoir-03.jpg" width="1080" height="1350" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Empowering boudoir portrait celebrating life at 40.">
         <div class="masonry-overlay"><span class="masonry-caption">This is what 40 looks like when it stops apologising.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('boudoir',3)">
-        <img class="masonry-thumb" src="assets/images/boudoir-04.jpg" width="1728" height="1080" loading="lazy" decoding="async" alt="Boudoir portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/boudoir-04.jpg" width="1728" height="1080" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Private boudoir portrait created for herself.">
         <div class="masonry-overlay"><span class="masonry-caption">For herself. For nobody else.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('boudoir',4)">
-        <img class="masonry-thumb" src="assets/images/boudoir-05.JPG" width="1080" height="1350" loading="lazy" decoding="async" alt="Boudoir portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/boudoir-05.JPG" width="1080" height="1350" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Intimate boudoir portrait from a secure private session.">
         <div class="masonry-overlay"><span class="masonry-caption">The image she almost didn't let me take.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('boudoir',5)">
-        <img class="masonry-thumb" src="assets/images/boudoir-06.jpg" width="1000" height="1250" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Boudoir portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/boudoir-06.jpg" width="1000" height="1250" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Post-divorce boudoir portrait marking a new chapter.">
         <div class="masonry-overlay"><span class="masonry-caption">Post-divorce. Chapter one.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('boudoir',6)">
-        <img class="masonry-thumb" src="assets/images/boudoir-07.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Boudoir portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/boudoir-07.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Golden-hour boudoir portrait without a filter.">
         <div class="masonry-overlay"><span class="masonry-caption">Gold hour. No filter.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('boudoir',7)">
-        <img class="masonry-thumb" src="assets/images/boudoir-08.jpg" width="1000" height="1250" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Boudoir portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/boudoir-08.jpg" width="1000" height="1250" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Quiet and intimate boudoir studio portrait.">
         <div class="masonry-overlay"><span class="masonry-caption">She was quiet for a long time.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('boudoir',8)">
-        <img class="masonry-thumb" src="assets/images/boudoir-09.jpg" width="1000" height="1250" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Boudoir portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/boudoir-09.jpg" width="1000" height="1250" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Empowering boudoir portrait revealing a new version of herself.">
         <div class="masonry-overlay"><span class="masonry-caption">The version she didn't know existed.</span></div>
       </div>
 
     </div>
-  </section>
+  </article>
 
   <!-- ═══════════════════════════════════════════
        GALLERY 2 — SWIMWEAR
   ═══════════════════════════════════════════ -->
-  <section class="gallery-section" id="swimwear">
+  <article class="gallery-section" id="swimwear">
     <div class="gallery-header reveal">
       <div>
         <h2 class="gallery-section-title">Swim<em>wear</em></h2>
@@ -742,52 +818,52 @@
     <div class="masonry reveal" id="swimwear-grid">
 
       <div class="masonry-item" onclick="openLightbox('swimwear',0)">
-        <img class="masonry-thumb" src="assets/images/swimwear-01.jpg" width="1600" height="1000" loading="lazy" decoding="async" alt="Swimwear portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/swimwear-01.jpg" width="1600" height="1000" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Golden-hour swimwear portrait in Byron Bay.">
         <div class="masonry-overlay"><span class="masonry-caption">Byron Bay · golden hour.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('swimwear',1)">
-        <img class="masonry-thumb" src="assets/images/swimwear-02.jpg" width="1000" height="1499" loading="lazy" decoding="async" alt="Swimwear portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/swimwear-02.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Empowering swimwear portrait photographed by the water.">
         <div class="masonry-overlay"><span class="masonry-caption">The water didn't ask her permission to be beautiful.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('swimwear',2)">
-        <img class="masonry-thumb" src="assets/images/swimwear-03.jpg" width="1000" height="1250" loading="lazy" decoding="async" alt="Swimwear portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/swimwear-03.jpg" width="1000" height="1250" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Studio swimwear portrait with linen and sea light.">
         <div class="masonry-overlay"><span class="masonry-caption">Studio · linen · sea-light.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('swimwear',3)">
-        <img class="masonry-thumb" src="assets/images/swimwear-04.jpg" width="1000" height="1250" loading="lazy" decoding="async" alt="Swimwear portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/swimwear-04.jpg" width="1000" height="1250" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Summer swimwear portrait from the exclusive photography portfolio.">
         <div class="masonry-overlay"><span class="masonry-caption">She's been waiting for summer all year.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('swimwear',4)">
-        <img class="masonry-thumb" src="assets/images/swimwear-05.jpg" width="1600" height="1000" loading="lazy" decoding="async" alt="Swimwear portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/swimwear-05.jpg" width="1600" height="1000" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="First-light swimwear portrait at Noosa Heads.">
         <div class="masonry-overlay"><span class="masonry-caption">Noosa Heads. First light.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('swimwear',5)">
-        <img class="masonry-thumb" src="assets/images/swimwear-06.jpg" width="1000" height="1499" loading="lazy" decoding="async" alt="Swimwear portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/swimwear-06.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Confident swimwear portrait celebrating individuality.">
         <div class="masonry-overlay"><span class="masonry-caption">Entirely herself.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('swimwear',6)">
-        <img class="masonry-thumb" src="assets/images/swimwear-07.jpg" width="1080" height="1080" loading="lazy" decoding="async" alt="Swimwear portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/swimwear-07.jpg" width="1080" height="1080" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Swimwear portrait shaped by Australian light.">
         <div class="masonry-overlay"><span class="masonry-caption">The light in this country is different.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('swimwear',7)">
-        <img class="masonry-thumb" src="assets/images/swimwear-08.jpg" width="1499" height="1000" loading="lazy" decoding="async" alt="Swimwear portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/swimwear-08.jpg" width="1499" height="1000" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Last-light swimwear portrait in Mornington.">
         <div class="masonry-overlay"><span class="masonry-caption">Mornington · last hour of light.</span></div>
       </div>
 
     </div>
-  </section>
+  </article>
 
   <!-- ═══════════════════════════════════════════
        GALLERY 3 — NUDE
   ═══════════════════════════════════════════ -->
-  <section class="gallery-section" id="nude">
+  <article class="gallery-section" id="nude">
     <div class="gallery-header reveal">
       <div>
         <h2 class="gallery-section-title">Fine Art <em>Nude</em></h2>
@@ -799,52 +875,52 @@
     <div class="masonry reveal" id="nude-grid">
 
       <div class="masonry-item" onclick="openLightbox('nude',0)">
-        <img class="masonry-thumb" src="assets/images/nude-01.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Fine art nude portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/nude-01.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Fine art nude portrait focused on form and light.">
         <div class="masonry-overlay"><span class="masonry-caption">Form. Light. Nothing else needed.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('nude',1)">
-        <img class="masonry-thumb" src="assets/images/nude-02.jpg" width="1080" height="1350" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Fine art nude portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/nude-02.jpg" width="1080" height="1350" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Honest fine art nude portrait from a private session.">
         <div class="masonry-overlay"><span class="masonry-caption">The most honest portrait she'd ever allowed.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('nude',2)">
-        <img class="masonry-thumb" src="assets/images/nude-03.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Fine art nude portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/nude-03.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Fine art nude portrait celebrating complete self-expression.">
         <div class="masonry-overlay"><span class="masonry-caption">Completely, finally, herself.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('nude',3)">
-        <img class="masonry-thumb" src="assets/images/nude-04.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Fine art nude portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/nude-04.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Fine art nude portrait balancing strength and softness.">
         <div class="masonry-overlay"><span class="masonry-caption">The line between strength and softness.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('nude',4)">
-        <img class="masonry-thumb" src="assets/images/nude-05.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Fine art nude portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/nude-05.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Personal fine art nude portrait created for the record.">
         <div class="masonry-overlay"><span class="masonry-caption">Not for anyone. For the record.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('nude',5)">
-        <img class="masonry-thumb" src="assets/images/nude-06.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Fine art nude portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/nude-06.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Fine art nude portrait in winter light at a Melbourne studio.">
         <div class="masonry-overlay"><span class="masonry-caption">Winter light. Melbourne studio.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('nude',6)">
-        <img class="masonry-thumb" src="assets/images/nude-07.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Fine art nude portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/nude-07.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Empowering fine art nude portrait celebrating her presence.">
         <div class="masonry-overlay"><span class="masonry-caption">She existed magnificently.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('nude',7)">
-        <img class="masonry-thumb" src="assets/images/nude-08.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Fine art nude portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/nude-08.jpg" width="1000" height="1499" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Unposed fine art nude portrait with an entirely present subject.">
         <div class="masonry-overlay"><span class="masonry-caption">Unposed. Unhidden. Entirely present.</span></div>
       </div>
 
       <div class="masonry-item" onclick="openLightbox('nude',8)">
-        <img class="masonry-thumb" src="assets/images/nude-09.jpg" width="1080" height="1619" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Fine art nude portfolio portrait by felixdahauscat">
+        <img class="masonry-thumb" src="assets/images/nude-09.jpg" width="1080" height="1619" loading="lazy" decoding="async" sizes="(max-width: 540px) calc(100vw - 48px), (max-width: 900px) calc(50vw - 42px), calc(33vw - 43px)" alt="Fine art nude portrait held in soft studio light.">
         <div class="masonry-overlay"><span class="masonry-caption">Held in her own light.</span></div>
       </div>
 
     </div>
-  </section>
+  </article>
 
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
@@ -934,13 +1010,15 @@
     </div>
   </section>
 
+  </main>
+
   <!-- FOOTER -->
   <footer>
-    <a href="index.html" class="footer-logo">felixdahauscat</a>
+    <a href="/" class="footer-logo">felixdahauscat</a>
     <span class="footer-copy">© 2026 felixdahauscat · All rights reserved</span>
     <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="portfolio.html">Portfolio</a>
+      <a href="/">Home</a>
+      <a href="/portfolio">Portfolio</a>
       <a href="#">Instagram</a>
     </div>
   </footer>
