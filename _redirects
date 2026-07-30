@@ -1,0 +1,4 @@
+http://felixdahauscat.com/* https://www.felixdahauscat.com/:splat 301!
+https://felixdahauscat.com/* https://www.felixdahauscat.com/:splat 301!
+/index.html / 301!
+/portfolio.html /portfolio 301!
