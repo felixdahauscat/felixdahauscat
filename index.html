@@ -903,6 +903,9 @@
       line-height: 1.6; margin-bottom: 28px;
     }
     .popup-card .form-input { margin-bottom: 14px; }
+    .popup-location-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+    }
     .popup-card .form-submit { width: 100%; margin-top: 4px; }
     .popup-consent {
       display: flex; gap: 11px; align-items: flex-start;
@@ -928,6 +931,7 @@
     @media (max-width: 480px) {
       .popup-card { padding: 48px 26px 40px; }
       .popup-title { font-size: 1.8rem; }
+      .popup-location-row { grid-template-columns: 1fr; gap: 0; }
     }
 
     /* Golden-hour editorial restyle */
@@ -1532,7 +1536,10 @@
         </p>
         <input type="text" name="name" class="form-input" placeholder="Your first name" autocomplete="given-name" required />
         <input type="email" name="email" class="form-input" placeholder="you@example.com" autocomplete="email" required />
-        <input type="text" name="location" class="form-input" placeholder="City, Country" autocomplete="address-level2" required />
+        <div class="popup-location-row">
+          <input type="text" name="city" class="form-input" placeholder="City" autocomplete="address-level2" required />
+          <input type="text" name="country" class="form-input" placeholder="Country" autocomplete="country-name" required />
+        </div>
         <label class="popup-consent">
           <input type="checkbox" name="newsletter" value="Yes" required />
           <span>Yes — add me to The Velvet List newsletter for special offers, travel dates, and studio news. Unsubscribe anytime.</span>
